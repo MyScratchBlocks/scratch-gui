@@ -707,7 +707,7 @@ class MenuBar extends React.Component {
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickRestorePoints}>
                                             <FormattedMessage
-                                                defaultMessage="Restore points"
+                                                defaultMessage="Backups"
                                                 description="Menu bar item to manage restore points"
                                                 id="tw.menuBar.restorePoints"
                                             />
