@@ -1031,6 +1031,26 @@ class MenuBar extends React.Component {
                             </Button>
                         </a>
                     </div>
+                    <div className={styles.menuBarItem}>
+                        <a
+                            className={styles.feedbackLink}
+                            href="https://myscratchblocks.github.io"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            {/* todo: icon */}
+                            <Button className={styles.feedbackButton}>
+                                <FormattedMessage
+                                    defaultMessage="Back to the {APP_NAME} website"
+                                    description="Button to go to the scratch mod's about page"
+                                    id="tw.feedbackButton"
+                                    values={{
+                                        APP_NAME
+                                    }}
+                                />
+                            </Button>
+                        </a>
+                    </div>
                 </div>
 
                 <div className={styles.accountInfoGroup}>
