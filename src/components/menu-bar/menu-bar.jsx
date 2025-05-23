@@ -1023,7 +1023,7 @@ class MenuBar extends React.Component {
                                 <FormattedMessage
                                     defaultMessage="{APP_NAME} Feedback"
                                     description="Button to give feedback in the menu bar"
-                                    id="tw.feedbackButton"
+                                    id="tw.feedbackButton.App"
                                     values={{
                                         APP_NAME
                                     }}
