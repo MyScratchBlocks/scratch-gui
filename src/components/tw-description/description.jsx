@@ -61,7 +61,7 @@ const Description = ({
             <div>
                 <h2 className={styles.header}>
                     <FormattedMessage
-                        defaultMessage="Instructions"
+                        defaultMessage="Description"
                         description="Header for instructions section of description"
                         id="tw.home.instructions"
                     />
