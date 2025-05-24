@@ -16,14 +16,14 @@ const CrashMessage = props => (
             />
             <p className={styles.header}>
                 <FormattedMessage
-                    defaultMessage="Oops! Something went wrong."
+                    defaultMessage="Oops! There an issue loading this MyScratchBlocks Project."
                     description="Crash Message title"
                     id="gui.crashMessage.label"
                 />
             </p>
             <p>
                 <FormattedMessage
-                    defaultMessage={'We are so sorry, but it looks like the page has crashed.' +
+                    defaultMessage={'We are so sorry, but it looks like the MyScratchBlocks editor has crashed.' +
                         ' Please refresh your page to try' +
                         ' again.'}
                     description="Message to inform the user that page has crashed."
@@ -52,7 +52,7 @@ const CrashMessage = props => (
                 onClick={props.onReload}
             >
                 <FormattedMessage
-                    defaultMessage="Reload"
+                    defaultMessage="Click to Reload the Page"
                     description="Button to reload the page when page crashes"
                     id="gui.crashMessage.reload"
                 />
