@@ -442,7 +442,7 @@ const SettingsModalComponent = props => (
         <Box className={styles.body}>
             <Header>
                 <FormattedMessage
-                    defaultMessage="Featured"
+                    defaultMessage="Approved by the {APP_NAME} Developers"
                     description="Settings modal section"
                     id="tw.settingsModal.featured"
                 />
@@ -451,10 +451,6 @@ const SettingsModalComponent = props => (
                 framerate={props.framerate}
                 onChange={props.onFramerateChange}
                 onCustomizeFramerate={props.onCustomizeFramerate}
-            />
-            <Interpolation
-                value={props.interpolation}
-                onChange={props.onInterpolationChange}
             />
             <HighQualityPen
                 value={props.highQualityPen}
@@ -466,7 +462,7 @@ const SettingsModalComponent = props => (
             />
             <Header>
                 <FormattedMessage
-                    defaultMessage="Remove Limits"
+                    defaultMessage="Unreviewed"
                     description="Settings modal section"
                     id="tw.settingsModal.removeLimits"
                 />
@@ -474,6 +470,10 @@ const SettingsModalComponent = props => (
             <InfiniteClones
                 value={props.infiniteClones}
                 onChange={props.onInfiniteClonesChange}
+            />
+            <Interpolation
+                value={props.interpolation}
+                onChange={props.onInterpolationChange}
             />
             <RemoveFencing
                 value={props.removeFencing}
@@ -485,7 +485,7 @@ const SettingsModalComponent = props => (
             />
             <Header>
                 <FormattedMessage
-                    defaultMessage="Danger Zone"
+                    defaultMessage="Marked as dangerous by the {APP_NAME} Developers"
                     description="Settings modal section"
                     id="tw.settingsModal.dangerZone"
                 />
