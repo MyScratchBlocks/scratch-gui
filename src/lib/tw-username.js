@@ -11,6 +11,7 @@ const username = localStorage.getItem('username');
        const randomUsername = `${username}`
        return randomUsername;
    }
+ }
     
 
 export {
