@@ -2,4 +2,4 @@
 export const MAXIMUM_CLOUD_VARIABLES = Infinity;
 
 // The maximum number of cloud variables that can be created in a vanilla Scratch.
-export const SCRATCH_MAX_CLOUD_VARIABLES = 10;
+export const SCRATCH_MAX_CLOUD_VARIABLES = 10000;
