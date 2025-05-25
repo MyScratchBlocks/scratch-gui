@@ -199,7 +199,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     };
     ProjectFetcherComponent.defaultProps = {
         assetHost: 'https://Editor-Compiler.onrender.com/assets',
-        projectHost: 'https://Editor-Compiler.onrender.com/projects'
+        projectHost: 'https://Editor-Compiler.onrender.com/json'
     };
 
     const mapStateToProps = state => ({
