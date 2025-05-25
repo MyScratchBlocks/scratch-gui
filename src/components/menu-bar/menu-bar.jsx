@@ -1041,7 +1041,7 @@ class MenuBar extends React.Component {
                             {/* todo: icon */}
                             <Button className={styles.feedbackButton}>
                                 <FormattedMessage
-                                    defaultMessage="Homepage"
+                                    defaultMessage="Home"
                                     description="Button to go to the scratch mod's about page"
                                     id="tw.feedbackButton"
                                     values={{
