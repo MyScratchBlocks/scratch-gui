@@ -85,19 +85,19 @@ const Credits = () => (
             </p>
         </section>
         <section>
-            <h2>Contributors</h2>
+            <h2>MyScratchBlocks Coders</h2>
             <UserList users={UserData.contributors} />
         </section>
         <section>
-            <h2>Addons</h2>
+            <h2>Addon Developers</h2>
             <UserList users={UserData.addonDevelopers} />
         </section>
         <section>
-            <h2>TurboWarp Extension Gallery</h2>
+            <h2>Extension Developers</h2>
             <UserList users={UserData.extensionDevelopers} />
         </section>
         <section>
-            <h2>Documentation</h2>
+            <h2>Docs Authors</h2>
             <UserList users={UserData.docs} />
         </section>
         <section>
