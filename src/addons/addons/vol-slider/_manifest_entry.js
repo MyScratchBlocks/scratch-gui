@@ -53,6 +53,6 @@ const manifest = {
   "tags": [
     "recommended"
   ]
-  "enabledByDefault": true,
+  "enabledByDefault": true
 };
 export default manifest;
