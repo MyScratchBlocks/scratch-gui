@@ -49,7 +49,6 @@ const manifest = {
       "default": false
     }
   ],
-  "dynamicDisable": true,
   "tags": [
     "recommended"
   ]
