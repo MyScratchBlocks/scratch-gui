@@ -23,43 +23,12 @@ const fromHardcoded = ({userID = '0', username}) => {
 
 const contributors = [
     {
-        userID: '41219524',
-        username: 'CubesterYT'
+        userID: '38890886',
+        username: 'MyScratchedAccount'
     },
     {
-        userID: '64691048',
-        username: 'CST1229'
-    },
-    {
-        userID: '128887584',
-        username: 'FurryR'
-    },
-    {
-        userID: '17340565',
-        username: 'GarboMuffin'
-    },
-    {
-        userID: '12498592',
-        username: 'LilyMakesThings'
-    },
-    {
-        userID: '105362329',
-        username: 'TrueFantom'
-    },
-    {
-        userID: '9636514',
-        username: 'Tacodiva7729'
-    },
-    {
-        userID: '141930175',
-        username: 'SimonShiki'
-    },
-    {
-        userID: '34824813',
-        username: 'Geotale'
-    },
-    {
-        username: 'Wowfunhappy'
+        userId: '136618149',
+        username: 'kRxZy_kRxZy'
     }
 ].map(fromHardcoded);
 
@@ -316,42 +285,8 @@ const extensionDevelopers = [
 
 const docs = [
     {
-        userID: '12498592',
-        username: 'LilyMakesThings'
-    },
-    {
-        username: 'DNin01'
-    },
-    {
-        username: 'Samq64'
-    },
-    {
-        username: '61080GBA'
-    },
-    {
-        username: 'adazem009'
-    },
-    {
-        username: 'sajtosteszta32'
-    },
-    {
-        username: 'yoyomonem'
-    },
-    {
-        userID: '55742784',
-        username: 'RedGuy7'
-    },
-    {
-        username: '28klotlucas2'
-    },
-    {
-        username: 'PPPDUD'
-    },
-    {
-        username: 'BackThePortal'
-    },
-    {
-        username: 'Naleksuh'
+        username: 'MyScratchedAccount',
+        userID: '38890886'
     }
 ].map(fromHardcoded);
 
