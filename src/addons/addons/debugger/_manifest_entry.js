@@ -82,7 +82,7 @@ const manifest = {
       "name": "Animated graphs (may affect performance)",
       "id": "fancy_graphs",
       "type": "boolean",
-      "default": false
+      "default": true
     }
   ],
   "tags": []
