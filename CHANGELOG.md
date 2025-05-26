@@ -1,4 +1,4 @@
-We don't use this file
+We don't use this file.
 
 <!--
 # Changelog
