@@ -48,10 +48,11 @@ const manifest = {
       "type": "boolean",
       "default": false
     }
+  "dynamicDisable": true,
   ],
   "tags": [
     "recommended"
   ]
-  "enabledByDefault": true
+  "enabledByDefault": true,
 };
 export default manifest;
