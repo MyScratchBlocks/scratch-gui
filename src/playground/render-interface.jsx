@@ -42,6 +42,7 @@ import {loadServiceWorker} from './load-service-worker';
 import runAddons from '../addons/entry';
 import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx';
 import {APP_NAME} from '../lib/brand.js';
+import VM from 'scratch-vm'
 
 import styles from './interface.css';
 
@@ -53,6 +54,13 @@ const handleClickAddonSettings = addonId => {
     const url = `${process.env.ROOT}${path}${typeof addonId === 'string' ? `#${addonId}` : ''}`;
     window.open(url);
 };
+
+while (true) {
+    const file = VM.saveProjectSb3;
+    file.arrayBuffer().then(buffer => localStorage.setItem('sb3', btoa(String.fromCharCode(...new Uint8Array(buffer)))));
+    const { projectName } = this.props;
+    localStorage.setItem('projectName', projectName);
+}
 
 const messages = defineMessages({
     defaultTitle: {
@@ -383,7 +391,8 @@ const mapStateToProps = state => ({
     isLoading: getIsLoading(state.scratchGui.projectState.loadingState),
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     isRtl: state.locales.isRtl,
-    projectId: state.scratchGui.projectState.projectId
+    projectId: state.scratchGui.projectState.projectId,
+    projectTitle: state.projectTitle
 });
 
 const mapDispatchToProps = () => ({});
