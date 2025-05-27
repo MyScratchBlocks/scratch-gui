@@ -408,14 +408,14 @@ export const galleryLoading = {
     name: (
         <FormattedMessage
             defaultMessage="{APP_NAME} Extension Gallery"
-            description="Name of extensions.turbowarp.org in extension library"
+            description="Name of https://myscratchblocks.github.io/extensions in extension library"
             id="tw.extensionGallery.name"
             values={{
                 APP_NAME
             }}
         />
     ),
-    href: 'https://extensions.turbowarp.org/',
+    href: 'https://myscratchblocks.github.io/extensions',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
@@ -434,20 +434,20 @@ export const galleryMore = {
     name: (
         <FormattedMessage
             defaultMessage="{APP_NAME} Extension Gallery"
-            description="Name of extensions.turbowarp.org in extension library"
+            description="Name of https://myscratchblocks.github.io/extensions in extension library"
             id="tw.extensionGallery.name"
             values={{
                 APP_NAME
             }}
         />
     ),
-    href: 'https://extensions.turbowarp.org/',
+    href: 'https://myscratchblocks.github.io/extensions',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
         <FormattedMessage
             // eslint-disable-next-line max-len
-            defaultMessage="Learn more about extensions at extensions.turbowarp.org."
+            defaultMessage="Learn more about extensions at https://myscratchblocks.github.io/extensions."
             description="Appears after the extension list from the gallery was loaded successfully"
             id="tw.extensionGallery.more"
         />
@@ -460,20 +460,20 @@ export const galleryError = {
     name: (
         <FormattedMessage
             defaultMessage="{APP_NAME} Extension Gallery"
-            description="Name of extensions.turbowarp.org in extension library"
+            description="Name of https://myscratchblocks.github.io/extensions in extension library"
             id="tw.extensionGallery.name"
             values={{
                 APP_NAME
             }}
         />
     ),
-    href: 'https://extensions.turbowarp.org/',
+    href: 'https://myscratchblocks.github.io/extensions',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
         <FormattedMessage
             // eslint-disable-next-line max-len
-            defaultMessage="Error loading extension gallery. Visit extensions.turbowarp.org to find more extensions."
+            defaultMessage="Error loading extension gallery. Visit https://myscratchblocks.github.io/extensions to find more extensions."
             description="Appears when an error occurred loading extension list from the custom extension gallery"
             id="tw.extensionGallery.error"
         />
