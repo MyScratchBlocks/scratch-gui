@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "hourly"
+      interval: "daily"
     allow:
       - dependency-name: "@turbowarp/*"
       - dependency-name: "scratch-audio"
