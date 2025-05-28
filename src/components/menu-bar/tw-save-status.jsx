@@ -10,13 +10,11 @@ import styles from './save-status.css';
 
 const TWSaveStatus = ({
     alertsList,
-    fileHandle,
-    projectChanged,
-    showSaveFilePicker
+    projectChanged
 }) => {
     const handleSaveAndUpload = async (downloadProjectCallback) => {
         try {
-            const blob = await downloadProjectCallback(); // Get the sb3 file blob
+            const blob = await downloadProjectCallback(); // Get the sb3 file blob only
             const file = new File([blob], 'project.sb3', {type: 'application/zip'});
             const formData = new FormData();
             formData.append('project', file);
@@ -44,8 +42,8 @@ const TWSaveStatus = ({
         filterInlineAlerts(alertsList).length > 0 ? (
             <InlineMessages />
         ) : projectChanged && (
-            <SB3Downloader showSaveFilePicker={showSaveFilePicker}>
-                {(_className, downloadProjectCallback, {smartSave}) => (
+            <SB3Downloader>
+                {(_className, downloadProjectCallback) => (
                     <div
                         onClick={() => handleSaveAndUpload(downloadProjectCallback)}
                         className={styles.saveNow}
@@ -64,16 +62,11 @@ const TWSaveStatus = ({
 
 TWSaveStatus.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
-    fileHandle: PropTypes.shape({
-        name: PropTypes.string
-    }),
-    projectChanged: PropTypes.bool,
-    showSaveFilePicker: PropTypes.func
+    projectChanged: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
     alertsList: state.scratchGui.alerts.alertsList,
-    fileHandle: state.scratchGui.tw.fileHandle,
     projectChanged: state.scratchGui.projectChanged
 });
 
