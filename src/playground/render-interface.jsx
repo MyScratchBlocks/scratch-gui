@@ -170,7 +170,7 @@ class Interface extends React.Component {
         if (!this.props.projectTitle) return;
 
         try {
-            const file = await VM.saveProjectSb3();
+            const file = await VM.saveProjectSb3;
             const buffer = await file.arrayBuffer();
             const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
             localStorage.setItem('sb3', base64);
