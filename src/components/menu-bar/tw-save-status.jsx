@@ -24,7 +24,7 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
             const meta = await metaRes.json();
 
             if (meta.author?.username === localStorage.getItem('username')) {
-                const uploadEndpoint = `https://editor-compiler.onrender.com/${projectId}/Save`;
+                const uploadEndpoint = `https://editor-compiler.onrender.com/${projectId}/save`;
                 await fetch(uploadEndpoint, {
                     method: 'POST',
                     body: formData
