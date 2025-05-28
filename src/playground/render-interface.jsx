@@ -1,25 +1,16 @@
 /**
  * Copyright (C) 2021 Thomas Weber
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * it under the terms of the GNU General Public License version 3.
  */
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {FormattedMessage, defineMessages, injectIntl, intlShape} from 'react-intl';
-import {getIsLoading} from '../reducers/project-state.js';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { getIsLoading } from '../reducers/project-state.js';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
@@ -35,12 +26,12 @@ import FeaturedProjects from '../components/tw-featured-projects/featured-projec
 import Description from '../components/tw-description/description.jsx';
 import BrowserModal from '../components/browser-modal/browser-modal.jsx';
 import CloudVariableBadge from '../containers/tw-cloud-variable-badge.jsx';
-import {isBrowserSupported} from '../lib/tw-environment-support-prober';
+import { isBrowserSupported } from '../lib/tw-environment-support-prober';
 import AddonChannels from '../addons/channels';
-import {loadServiceWorker} from './load-service-worker';
+import { loadServiceWorker } from './load-service-worker';
 import runAddons from '../addons/entry';
 import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx';
-import {APP_NAME} from '../lib/brand.js';
+import { APP_NAME } from '../lib/brand.js';
 import VM from 'scratch-vm';
 
 import styles from './interface.css';
@@ -86,7 +77,6 @@ const Footer = () => (
             <div className={styles.footerText}>
                 <FormattedMessage
                     defaultMessage="{APP_NAME} is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
-                    description="Disclaimer that TurboWarp is not connected to Scratch"
                     id="tw.footer.disclaimer"
                     values={{ APP_NAME }}
                 />
@@ -94,7 +84,6 @@ const Footer = () => (
             <div className={styles.footerText}>
                 <FormattedMessage
                     defaultMessage="Scratch is a project of the Scratch Foundation. It is available for free at {scratchDotOrg}."
-                    description="A disclaimer that Scratch requires when referring to Scratch. {scratchDotOrg} is a link with text 'https://scratch.org/'"
                     id="tw.footer.scratchDisclaimer"
                     values={{
                         scratchDotOrg: (
@@ -149,12 +138,17 @@ class Interface extends React.Component {
         this.handleUpdateProjectTitle = this.handleUpdateProjectTitle.bind(this);
         this.saveProjectToLocalStorage = this.saveProjectToLocalStorage.bind(this);
         this.projectSaveInterval = null;
+        this.autoPostInterval = null;
     }
 
     componentDidMount() {
         this.projectSaveInterval = setInterval(() => {
             this.saveProjectToLocalStorage();
         }, 5000);
+
+        this.autoPostInterval = setInterval(() => {
+            this.sendAutoSave();
+        }, 10000);
     }
 
     componentDidUpdate(prevProps) {
@@ -166,6 +160,9 @@ class Interface extends React.Component {
     componentWillUnmount() {
         if (this.projectSaveInterval) {
             clearInterval(this.projectSaveInterval);
+        }
+        if (this.autoPostInterval) {
+            clearInterval(this.autoPostInterval);
         }
     }
 
@@ -180,6 +177,28 @@ class Interface extends React.Component {
             localStorage.setItem('projectName', this.props.projectTitle);
         } catch (err) {
             console.error('Failed to save project to localStorage:', err);
+        }
+    }
+
+    async sendAutoSave() {
+        try {
+            const file = await VM.saveProjectSb3();
+            const formData = new FormData();
+            formData.append('project', file, 'project.sb3');
+
+            const projectId = window.location.hash.substring(1);
+            if (!projectId) return;
+
+            const response = await fetch(`https://editor-compiler.onrender.com/${projectId}/save`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                console.warn('Auto-save POST failed:', response.status);
+            }
+        } catch (err) {
+            console.error('Auto-save failed:', err);
         }
     }
 
