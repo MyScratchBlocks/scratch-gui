@@ -5,17 +5,18 @@ import React from 'react';
 import InlineMessages from '../../containers/inline-messages.jsx';
 import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import {filterInlineAlerts} from '../../reducers/alerts';
-import VM from 'scratch-vm'
+
 import styles from './save-status.css';
 
 const TWSaveStatus = ({
     alertsList,
+    fileHandle,
     projectChanged,
     showSaveFilePicker
 }) => {
     const handleSaveAndUpload = async (downloadProjectCallback) => {
         try {
-            const blob = await vm.saveProjectSb3(); // Get the sb3 file blob
+            const blob = await downloadProjectCallback(); // Get the sb3 file blob
             const file = new File([blob], 'project.sb3', {type: 'application/zip'});
             const formData = new FormData();
             formData.append('project', file);
@@ -44,7 +45,7 @@ const TWSaveStatus = ({
             <InlineMessages />
         ) : projectChanged && (
             <SB3Downloader showSaveFilePicker={showSaveFilePicker}>
-                {(_className, downloadProjectCallback) => (
+                {(_className, downloadProjectCallback, {smartSave}) => (
                     <div
                         onClick={() => handleSaveAndUpload(downloadProjectCallback)}
                         className={styles.saveNow}
@@ -63,16 +64,20 @@ const TWSaveStatus = ({
 
 TWSaveStatus.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
+    fileHandle: PropTypes.shape({
+        name: PropTypes.string
+    }),
     projectChanged: PropTypes.bool,
     showSaveFilePicker: PropTypes.func
 };
 
 const mapStateToProps = state => ({
     alertsList: state.scratchGui.alerts.alertsList,
+    fileHandle: state.scratchGui.tw.fileHandle,
     projectChanged: state.scratchGui.projectChanged
 });
 
 export default connect(
     mapStateToProps,
-    null
+    () => ({})
 )(TWSaveStatus);
