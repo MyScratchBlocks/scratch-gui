@@ -8,59 +8,60 @@ import {filterInlineAlerts} from '../../reducers/alerts';
 
 import styles from './save-status.css';
 
-const TWSaveStatus = ({
-    alertsList,
-    projectChanged
-}) => {
+/**
+ * Uploads the current project to the server.
+ */
+const TWProjectUploader = ({alertsList, projectChanged}) => {
     const handleSaveAndUpload = async (downloadProjectCallback) => {
         try {
-            const blob = await downloadProjectCallback(); // Get the sb3 file blob only
+            const blob = await downloadProjectCallback();
             const file = new File([blob], 'project.sb3', {type: 'application/zip'});
             const formData = new FormData();
             formData.append('project', file);
 
-            const res = await fetch(`https://editor-compiler.onrender.com/api/projects/${window.location.hash.substring(1)}/meta`);
-            const json = await res.json();
+            const projectId = window.location.hash.substring(1);
+            const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${projectId}/meta`);
+            const meta = await metaRes.json();
 
-            if (json.author?.username === localStorage.getItem('username')) {
-                const projectId = window.location.hash.substring(1);
-                const endpoint = `https://editor-compiler.onrender.com/${projectId}/Save`;
-
-                await fetch(endpoint, {
+            if (meta.author?.username === localStorage.getItem('username')) {
+                const uploadEndpoint = `https://editor-compiler.onrender.com/${projectId}/Save`;
+                await fetch(uploadEndpoint, {
                     method: 'POST',
                     body: formData
                 });
-
                 console.log('Project uploaded successfully.');
+            } else {
+                console.warn('Not authorized to upload this project.');
             }
         } catch (error) {
             console.error('Failed to upload project:', error);
         }
     };
 
+    // Only show inline alerts if present
+    if (filterInlineAlerts(alertsList).length > 0) {
+        return <InlineMessages />;
+    }
+
     return (
-        filterInlineAlerts(alertsList).length > 0 ? (
-            <InlineMessages />
-        ) : projectChanged && (
-            <SB3Downloader>
-                {(_className, downloadProjectCallback) => (
-                    <div
-                        onClick={() => handleSaveAndUpload(downloadProjectCallback)}
-                        className={styles.saveNow}
-                    >
-                        <FormattedMessage
-                            defaultMessage="Save Now"
-                            description="Button to upload project to server"
-                            id="tw.menuBar.saveNow"
-                        />
-                    </div>
-                )}
-            </SB3Downloader>
-        )
+        <SB3Downloader>
+            {(_className, downloadProjectCallback) => (
+                <div
+                    onClick={() => handleSaveAndUpload(downloadProjectCallback)}
+                    className={styles.saveNow}
+                >
+                    <FormattedMessage
+                        defaultMessage="Save Now"
+                        description="Button to upload project to server"
+                        id="tw.menuBar.saveNow"
+                    />
+                </div>
+            )}
+        </SB3Downloader>
     );
 };
 
-TWSaveStatus.propTypes = {
+TWProjectUploader.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
     projectChanged: PropTypes.bool
 };
@@ -73,4 +74,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     () => ({})
-)(TWSaveStatus);
+)(TWProjectUploader);
