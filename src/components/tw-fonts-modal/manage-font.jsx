@@ -11,7 +11,7 @@ import exportIcon from './export.svg';
 const messages = defineMessages({
     delete: {
         // eslint-disable-next-line max-len
-        defaultMessage: 'Are you sure you want to delete "{font}"? Any vector costumes will use the fallback font instead.',
+        defaultMessage: 'Are you sure you want to delete the font named "{font}"? Any vector (not bitmap, since that is static) costumes will use the fallback font that you set instead.',
         description: 'Part of font management modal. {font} is replaced with the name of a font like "Arial"',
         id: 'tw.fonts.delete'
     }
