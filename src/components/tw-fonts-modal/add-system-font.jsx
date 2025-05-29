@@ -44,7 +44,7 @@ class AddSystemFont extends React.Component {
                 <p>
                     <FormattedMessage
                         // eslint-disable-next-line max-len
-                        defaultMessage="Type in the name of any font built in to your computer. The font may not appear correctly for everyone."
+                        defaultMessage="Type in the name of any font built in to your computer. Other user's computers may not have this font, so you may be better of downloading the font and inporting it."
                         description="Part of font management modal."
                         id="tw.fonts.system.name"
                     />
