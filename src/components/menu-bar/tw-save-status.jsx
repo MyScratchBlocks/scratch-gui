@@ -43,6 +43,7 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
                 }
 
                 console.log('Project uploaded successfully.');
+                alert("Project Saved")
             } else {
                 console.warn('Not authorized to upload this project.');
                 alert("You don't own this project! Please use the remix function provided to remix projects. Otherwise, don't steal projects.");
