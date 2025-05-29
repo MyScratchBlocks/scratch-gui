@@ -50,7 +50,8 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
             }
         } catch (error) {
             console.error('Failed to upload project:', error);
-            alert("Failed to save project!");
+            alert("Failed to save project. Please Try Again!");
+            window.location.href = window.location.pathname + window.location.hash;
         }
     };
 
