@@ -9,7 +9,7 @@ import styles from './webgl-modal.css';
 const messages = defineMessages({
     label: {
         id: 'gui.webglModal.label',
-        defaultMessage: 'Your Browser Does Not Support WebGL',
+        defaultMessage: 'Oops! Your Browser Does Not Support WebGL',
         description: 'WebGL missing title'
     }
 });
@@ -32,7 +32,7 @@ const WebGlModal = ({intl, ...props}) => (
                 <p>
                     { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for Scratch 3.0 to run."
+                        defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for MyScratchBlocks and Scratch 3.0 to run. Please ask your parent to get a better browser or change your browser's settings to support it."
                         description="WebGL missing message"
                         id="gui.webglModal.description"
                         values={{
@@ -75,10 +75,10 @@ const WebGlModal = ({intl, ...props}) => (
                             previewFaqLink: (
                                 <a
                                     className={styles.faqLink}
-                                    href="//scratch.mit.edu/3faq"
+                                    href="https://get.webgl.org"
                                 >
                                     <FormattedMessage
-                                        defaultMessage="FAQ"
+                                        defaultMessage="WebGL Compatibilty Page"
                                         description="link to Scratch 3.0 FAQ page"
                                         id="gui.webglModal.previewfaqlinktext"
                                     />
