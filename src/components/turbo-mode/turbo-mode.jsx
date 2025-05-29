@@ -18,7 +18,7 @@ const TurboMode = ({isSmall}) => (
         {!isSmall && (
             <div className={styles.turboLabel}>
                 <FormattedMessage
-                    defaultMessage="Turbo Mode"
+                    defaultMessage="Turbo Mode is Enabled - Scripts run faster"
                     description="Label indicating turbo mode is active"
                     id="gui.turboMode.active"
                 />
