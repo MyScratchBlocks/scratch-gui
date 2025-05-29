@@ -10,23 +10,23 @@ import {formatBytes} from '../../lib/tw-bytes-utils';
 
 const messages = defineMessages({
     title: {
-        defaultMessage: 'Restore Points',
+        defaultMessage: 'Backups',
         description: 'Title of restore point management modal',
         id: 'tw.restorePoints.title'
     },
     never: {
-        defaultMessage: 'never',
+        defaultMessage: 'Never - Disable Backups',
         id: 'tw.restorePoints.never',
         description: 'Part of restore point modal. Appears as dropdown in context "Restore points are created [never]"'
     },
     oneMinute: {
-        defaultMessage: 'every minute',
+        defaultMessage: 'Every Minute',
         id: 'tw.restorePoints.1minute',
         // eslint-disable-next-line max-len
         description: 'Part of restore point modal. Appears as dropdown in context "Restore points are created [every minute]"'
     },
     minutes: {
-        defaultMessage: 'every {n} minutes',
+        defaultMessage: 'Every {n} Minutes',
         id: 'tw.restorePoints.minutes',
         // eslint-disable-next-line max-len
         description: 'Part of restore point modal. Appears as dropdown in context "Restore points are created [every 5 minutes]". {n} will be replaced with a number greater than 1.'
@@ -89,7 +89,7 @@ const RestorePointModal = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="{APP_NAME} periodically saves restore points on your computer to help recover your project if you forget to save. This is intended as a last resort for recovery. Your computer may silently delete these restore points at any time. DO NOT rely on this feature."
+                    defaultMessage="{APP_NAME} periodically creates Backups of your work in progress projects on your computer to help recover your project if you forget to save. Please try other methods before using a Backup, as this was made as a last resort for recovery. Your computer may silently delete these backups at any time, and the backups are tied to your browser or application. DO NOT rely on this feature all the time, remember to save!"
                     id="tw.restorePoints.description"
                     values={{
                         APP_NAME: APP_NAME
@@ -99,7 +99,7 @@ const RestorePointModal = props => (
 
             <p>
                 <FormattedMessage
-                    defaultMessage="Restore points are created {time}."
+                    defaultMessage="Backups should be created {time}."
                     id="tw.restorePoints.intervalOption"
                     // eslint-disable-next-line max-len
                     description="{time} will be replaced with a dropdown with values such as [every 5 minutes] and [never]"
@@ -118,7 +118,7 @@ const RestorePointModal = props => (
             {props.interval < 0 && (
                 <p className={styles.disabled}>
                     <FormattedMessage
-                        defaultMessage="Disabling restore points is dangerous."
+                        defaultMessage="WARNING - Disabling Backups is dangerous, since you could loose lots of time if you ferget to save and have no other options. Please re-enable this."
                         // eslint-disable-next-line max-len
                         description="Warning that appears in restore point modal when the user has disabled restore points."
                         id="tw.restorePoints.off"
@@ -130,7 +130,7 @@ const RestorePointModal = props => (
                 <div className={styles.error}>
                     <p>
                         <FormattedMessage
-                            defaultMessage="Restore points are not available due to an error:"
+                            defaultMessage="Backups are currently not available on your device due to the following error:"
                             // eslint-disable-next-line max-len
                             description="Error message in restore point manager when the list of restore points cannot be loaded. Followed by an error message."
                             id="tw.restorePoints.error"
@@ -154,7 +154,7 @@ const RestorePointModal = props => (
             ) : props.restorePoints.length === 0 ? (
                 <div className={styles.empty}>
                     <FormattedMessage
-                        defaultMessage="No restore points found."
+                        defaultMessage="No Backups found. They could of been deleted, or backups did not save yet."
                         description="Message that appears when no restore points exist yet"
                         id="tw.restorePoints.empty"
                     />
@@ -178,7 +178,7 @@ const RestorePointModal = props => (
                         <div className={styles.totalSize}>
                             <div>
                                 <FormattedMessage
-                                    defaultMessage="Estimated storage used: {size}"
+                                    defaultMessage="Estimated storage used on our Backups feature: {size}"
                                     description="Part of restore point modal describing amount of disk space used"
                                     id="tw.restorePoints.size"
                                     values={{
@@ -189,7 +189,7 @@ const RestorePointModal = props => (
                             <div className={styles.totalSizeDescription}>
                                 <FormattedMessage
                                     // eslint-disable-next-line max-len
-                                    defaultMessage="Costumes or sounds used by multiple restore points are only stored once."
+                                    defaultMessage="To avoid wasting storage, the same costumes or sounds used by multiple Backups are only stored once."
                                     // eslint-disable-next-line max-len
                                     description="Part of the restore point modal that explains why the total storage used is less than may be expected."
                                     id="tw.restorePoints.size2"
@@ -203,7 +203,7 @@ const RestorePointModal = props => (
                             disabled={props.isLoading}
                         >
                             <FormattedMessage
-                                defaultMessage="Delete All"
+                                defaultMessage="Delete All Backups"
                                 description="Button to delete all restore points"
                                 id="tw.restorePoints.deleteAll"
                             />
