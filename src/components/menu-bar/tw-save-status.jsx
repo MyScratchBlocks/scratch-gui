@@ -21,6 +21,7 @@ const TWProjectUploader = ({alertsList, projectChanged, downloadProjectCallback}
             const projectId = window.location.hash.substring(1);
             const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${projectId}/meta`);
             const meta = await metaRes.json();
+            formData.append('projectName', meta.title);
 
             if (meta.error) {
                 alert(meta.error);
