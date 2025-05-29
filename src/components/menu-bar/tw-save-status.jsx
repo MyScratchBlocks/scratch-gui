@@ -32,9 +32,11 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
                 console.log('Project uploaded successfully.');
             } else {
                 console.warn('Not authorized to upload this project.');
+                alert("You don't own this project!")
             }
         } catch (error) {
             console.error('Failed to upload project:', error);
+            alert("Failed to save project!")
         }
     };
 
