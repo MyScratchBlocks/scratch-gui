@@ -43,7 +43,7 @@ const TWProjectUploader = ({alertsList, projectChanged, downloadProjectCallback}
                 console.log('Project uploaded successfully.');
             } else {
                 console.warn('Not authorized to upload this project.');
-                alert("You don't own this project!");
+                alert("You don't own this project! Please use the remix function provided to remix projects. Otherwise, don't steal projects.");
             }
         } catch (error) {
             console.error('Failed to upload project:', error);
