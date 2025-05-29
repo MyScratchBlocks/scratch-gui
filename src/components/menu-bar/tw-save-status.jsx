@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import InlineMessages from '../../containers/inline-messages.jsx';
 import {filterInlineAlerts} from '../../reducers/alerts';
+import VM from 'scratch-vm';
 
 import styles from './save-status.css';
 
