@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2021 Thomas Weber
+ * Copyright (C) 2025 MyScratchBlocks
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3.
  */
@@ -99,31 +99,31 @@ const Footer = () => (
                     <a href="credits.html">
                         <FormattedMessage defaultMessage="Credits" id="tw.footer.credits" />
                     </a>
-                    <a href="https://github.com/sponsors/GarboMuffin">
-                        <FormattedMessage defaultMessage="Donate" id="tw.footer.donate" />
+                    <a href="https://myscratchblocks.github.io/community-projects">
+                        <FormattedMessage defaultMessage="Community Projects" id="tw.footer.donate" />
                     </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://desktop.turbowarp.org/">TurboWarp Desktop</a>
-                    <a href="https://packager.turbowarp.org/">TurboWarp Packager</a>
+                    <a href="https://myscratchblocks.githb.io/desktop">TurboWarp Desktop</a>
+                    <a href="https://myscratchblocks.github.io/packager">MyScratchBlocks Packager</a>
                     <a href="https://docs.turbowarp.org/embedding">
                         <FormattedMessage defaultMessage="Embedding" id="tw.footer.embed" />
                     </a>
-                    <a href="https://docs.turbowarp.org/url-parameters">
+                    <a href="https://myscratchblocks.github.io/docs#url-parameters">
                         <FormattedMessage defaultMessage="URL Parameters" id="tw.footer.parameters" />
                     </a>
-                    <a href="https://docs.turbowarp.org/">
+                    <a href="https://myscratchblocks.github.io/docs/">
                         <FormattedMessage defaultMessage="Documentation" id="tw.footer.documentation" />
                     </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://scratch.mit.edu/users/GarboMuffin/#comments">
+                    <a href="https://github.com/MyScratchBlocks/scratch-gui/issues/">
                         <FormattedMessage defaultMessage="Feedback & Bugs" id="tw.feedback" />
                     </a>
-                    <a href="https://github.com/TurboWarp/">
+                    <a href="https://github.com/MyScratchBlocks/scratch-gui/">
                         <FormattedMessage defaultMessage="Source Code" id="tw.code" />
                     </a>
-                    <a href="privacy.html">
+                    <a href="https://myscratchblocks.githun.io/privacy-policy.html">
                         <FormattedMessage defaultMessage="Privacy Policy" id="tw.privacy" />
                     </a>
                 </div>
@@ -263,8 +263,8 @@ class Interface extends React.Component {
                             <div className={styles.section}><ProjectInput /></div>
                             {(description.instructions === 'unshared' || description.credits === 'unshared') && (
                                 <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
-                                    <p><FormattedMessage defaultMessage="Unshared projects are no longer visible." id="tw.unshared2.1" /></p>
-                                    <p><FormattedMessage defaultMessage="For more information, visit: {link}" id="tw.unshared.2" values={{ link: <a href="https://docs.turbowarp.org/unshared-projects" target="_blank" rel="noopener noreferrer">{'https://docs.turbowarp.org/unshared-projects'}</a> }} /></p>
+                                    <p><FormattedMessage defaultMessage="Project token can't be found" id="tw.unshared2.1" /></p>
+                                    <p><FormattedMessage defaultMessage="This may mean that the project does not exist or you are trying to access a Scratch Project" id="tw.unshared.2" values={{ link: <a href="https://docs.turbowarp.org/unshared-projects" target="_blank" rel="noopener noreferrer">{'https://docs.turbowarp.org/unshared-projects'}</a> }} /></p>
                                     <p><FormattedMessage defaultMessage="If the project was shared recently, this message may appear incorrectly for a few minutes." id="tw.unshared.cache" /></p>
                                     <p><FormattedMessage defaultMessage="If this project is actually shared, please report a bug." id="tw.unshared.bug" /></p>
                                 </div>
@@ -278,7 +278,7 @@ class Interface extends React.Component {
                                 </div>
                             )}
                             <div className={styles.section}>
-                                <p><FormattedMessage defaultMessage="{APP_NAME} is a Scratch mod that compiles projects to JavaScript to make them run really fast..." id="tw.home.description" values={{ APP_NAME }} /></p>
+                                <p><FormattedMessage defaultMessage="{APP_NAME} is a Scratch & Turbrowarp mod that compiles projects to JavaScript to make them run really fast..." id="tw.home.description" values={{ APP_NAME }} /></p>
                             </div>
                             <div className={styles.section}><FeaturedProjects studio="27205657" /></div>
                         </>
