@@ -32,7 +32,7 @@ const InvalidProjectModal = props => (
         <div className={styles.body}>
             <p>
                 <FormattedMessage
-                    defaultMessage="Could not load project:"
+                    defaultMessage="MyScratchBlocks could not load this project due to an error:"
                     // eslint-disable-next-line max-len
                     description="Part of modal that appears when a project could not be loaded. Followed by error message."
                     id="tw.invalidProject.error"
@@ -51,19 +51,19 @@ const InvalidProjectModal = props => (
                 <p>
                     <FormattedMessage
                         // eslint-disable-next-line max-len
-                        defaultMessage="This error often means that a small part of the project has been corrupted, but that it is otherwise valid. This can be easy to fix, so please {reportIt}."
+                        defaultMessage="This error often means that a small part of the project has been corrupted, but that it is otherwise valid. This may be easy to fix. If you need further help, please {reportIt}. We may be able to fix it in our own time, so please say thanks if a staff member helps you."
                         // eslint-disable-next-line max-len
                         description="Part of modal that appears when a project could not be loaded. {reportIt} becomes a link 'report it'."
                         id="tw.invalidProject.validationError"
                         values={{
                             reportIt: (
                                 <a
-                                    href="https://github.com/TurboWarp/sb3fix/issues"
+                                    href="https://github.com/MyScratchBlocks/scratch%gui/issues"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
                                     <FormattedMessage
-                                        defaultMessage="report it"
+                                        defaultMessage="contact us here"
                                         // eslint-disable-next-line max-len
                                         description="Part of modal that appears when a project could not be loaded. Used in context 'Please report this as this is ...'"
                                         id="tw.invalidProject.reportIt"
@@ -78,7 +78,7 @@ const InvalidProjectModal = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="You may be able to recover an older version of the project from automatic restore points or other backups."
+                    defaultMessage="You may be in luck! Check if you saved multiple copies, or check if you saved it as a unshared or shared project in your MyScratchBlocks account. You can also use the Backups feature below:"
                     description="Part of modal that appears when a project could not be loaded."
                     id="tw.invalidProject.options"
                 />
@@ -89,7 +89,7 @@ const InvalidProjectModal = props => (
                 onClick={props.onClickRestorePoints}
             >
                 <FormattedMessage
-                    defaultMessage="View Restore Points"
+                    defaultMessage="View Saved Backups"
                     // eslint-disable-next-line max-len
                     description="Part of modal that appears when a project could not be loaded. This is a button that opens the restore point menu."
                     id="tw.invalidProject.restorePoints"
