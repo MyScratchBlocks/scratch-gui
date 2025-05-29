@@ -10,7 +10,7 @@ import styles from './save-status.css';
 /**
  * Uploads the current project to the server.
  */
-const TWProjectUploader = ({alertsList, projectChanged, downloadProjectCallback}) => {
+const TWProjectUploader = ({alertsList, projectChanged}) => {
     const handleSaveAndUpload = async () => {
         try {
             const blob = await vm.saveProjectSb3();
