@@ -4,13 +4,18 @@ on:
   schedule:
     - cron: '*/10 * * * *'
   push:
-    branches: [ "main" ]
+    branches: 
+      - main
+      - develop
+    paths:
+      - '**'  # Adjust this if you want to limit which files trigger the workflow
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: production
     permissions:
