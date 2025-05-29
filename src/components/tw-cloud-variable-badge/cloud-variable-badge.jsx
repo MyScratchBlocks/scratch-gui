@@ -44,7 +44,7 @@ const CloudVariableBadge = props => {
     
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="{APP_NAME}'s cloud variables are not connected to Scratch's. Anyone can {changeTheirUsername} to anything, so beware of impersonation."
+                defaultMessage="{APP_NAME}'s cloud variables are not connected to Scratch's. Anyone can {changeTheirUsername} to anything, even when they have linked their Scratch Account to {APP_NAME}, so beware of impersonation."
                 // eslint-disable-next-line max-len
                 description="Cloud variable information shown under projects with cloud variables. {changeTheirUsername} will be replaced with a link with text 'change their username' (translated)"
                 id="tw.usesCloudVariables2"
@@ -94,7 +94,7 @@ const CloudVariableBadge = props => {
 
             {selectedHost && selectedHost.provider && (
                 <FormattedMessage
-                    defaultMessage="Server provided by {name}."
+                    defaultMessage="This server is powered or provided by {name}."
                     description="Link to person/company who provided this cloud variable server"
                     id="tw.cloudProvider"
                     values={{
