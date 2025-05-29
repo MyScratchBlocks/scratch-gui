@@ -13,7 +13,7 @@ import styles from './save-status.css';
 const TWProjectUploader = ({alertsList, projectChanged, downloadProjectCallback}) => {
     const handleSaveAndUpload = async () => {
         try {
-            const blob = await downloadProjectCallback();
+            const blob = await vm.saveProjectSb3();
             const file = new File([blob], 'project.sb3', {type: 'application/zip'});
             const formData = new FormData();
             formData.append('project', file);
