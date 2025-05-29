@@ -5,7 +5,7 @@ import styles from './sound-editor-not-supported.css';
 const SoundEditorNotSupported = () => (
     <div className={styles.container}>
         <FormattedMessage
-            defaultMessage="Sound editor is not supported in this browser."
+            defaultMessage="Your browser is a bit werid, Sound editor is not supported in this browser. Get A Better Browser!"
             // eslint-disable-next-line max-len
             description="Appears when opening the sound editor in some weird browsers that don't support the proper APIs."
             id="tw.soundEditorNotSupported"
