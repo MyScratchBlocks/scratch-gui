@@ -15,7 +15,7 @@ const OpenWindowModal = props => (
         <p>
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="This website has not been reviewed by the {APP_NAME} developers. It may contain dangerous or malicious code."
+                defaultMessage="This website has not been reviewed by the {APP_NAME} developers. Possible risks include: Ads may show up out of nowhere or it may contain dangerous or malicious code."
                 description="Part of modal when a project attempts to open a window using an extension"
                 id="tw.openWindow.dangerous"
                 values={{
