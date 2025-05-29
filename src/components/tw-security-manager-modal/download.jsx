@@ -160,7 +160,7 @@ const DownloadModal = props => (
         <p>
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="This file has not been reviewed by the {APP_NAME} developers."
+                defaultMessage="This file has not been reviewed by the {APP_NAME} developers. Make sure that you trust the file developers."
                 description="Part of modal when a project attempts to save a file to someone's downloads folder."
                 id="tw.download.danger"
                 values={{
@@ -173,7 +173,7 @@ const DownloadModal = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="This is an executable file format that may contain malicious code if you run it."
+                    defaultMessage="WARNING - This is an executable file format that may contain malicious code if you run it. Ths file may be malware, but we are not sure since we are not a anti-virus company."
                     description="Part of modal when a project attempts to save a file to someone's downloads folder."
                     id="tw.download.executable"
                     values={{
