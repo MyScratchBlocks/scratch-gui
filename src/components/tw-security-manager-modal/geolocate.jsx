@@ -5,7 +5,7 @@ const Geolocate = () => (
     <div>
         <p>
             <FormattedMessage
-                defaultMessage="The project wants to know your location."
+                defaultMessage="The project wants to know your IP & Location."
                 // eslint-disable-next-line max-len
                 description="Part of modal that appears when a project tries to geolocate the user using an extension"
                 id="tw.geolocate.title"
@@ -14,7 +14,7 @@ const Geolocate = () => (
         <p>
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="If allowed, you may be prompted to allow location access by your browser."
+                defaultMessage="If allowed, you may be prompted to allow location access by your browser. We told you since it's part of our Privacy Policy to do ao."
                 // eslint-disable-next-line max-len
                 description="Part of modal that appears when a project tries to geolocate the user using an extension"
                 id="tw.geolocate.permission"
