@@ -15,7 +15,7 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Reject Dependabot Pull Requests
-        run: gh pr close --comment "We don't accept pull requests from Dependabot, so this pull request has been auto-rejected. Thanks to @kRxZykRxZy on issue 8 for the idea! If you think this Dependabot pull request is needed, please create an issue about it on Github." --delete-branch "1"
+        run: gh pr close --comment "We don't accept pull requests from Dependabot, so this pull request has been auto-rejected. If you think this Dependabot pull request is needed, please create an issue about it on Github." --delete-branch "1"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
