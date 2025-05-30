@@ -11,7 +11,7 @@ import styles from './save-status.css';
 /**
  * Uploads the current project to the server.
  */
-const TWProjectUploader = ({alertsList, projectChanged}) => {
+const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
     const handleSaveAndUpload = async () => {
         try {
             const blob = await vm.saveProjectSb3();
@@ -19,8 +19,8 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
             const formData = new FormData();
             formData.append('project', file);
 
-            const { projectId } = this.props;
-            const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${projectId}/meta`);
+            // Use projectId directly without "this.props"
+            const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${projectId || window.location.hash.substring(1)}/meta`);
             const meta = await metaRes.json();
             formData.append('projectName', meta.title);
 
@@ -43,7 +43,7 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
                 }
 
                 console.log('Project uploaded successfully.');
-                alert("Project Saved")
+                alert("Project Saved");
             } else {
                 console.warn('Not authorized to upload this project.');
                 alert("You don't own this project! Please use the remix function provided to remix projects. Otherwise, don't steal projects.");
@@ -75,7 +75,7 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
 TWProjectUploader.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
     projectChanged: PropTypes.bool,
-    downloadProjectCallback: PropTypes.func.isRequired
+    projectId: PropTypes.string  // Ensure you define the correct prop type
 };
 
 const mapStateToProps = state => ({
