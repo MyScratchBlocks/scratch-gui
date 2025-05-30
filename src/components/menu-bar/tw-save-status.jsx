@@ -19,7 +19,7 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
             const formData = new FormData();
             formData.append('project', file);
 
-            const projectId = window.location.hash.substring(1);
+            const { projectId } = this.props;
             const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${projectId}/meta`);
             const meta = await metaRes.json();
             formData.append('projectName', meta.title);
@@ -51,7 +51,6 @@ const TWProjectUploader = ({alertsList, projectChanged}) => {
         } catch (error) {
             console.error('Failed to upload project:', error);
             alert("Failed to save project. Please Try Again!");
-            window.location.href = window.location.pathname + window.location.hash;
         }
     };
 
@@ -81,7 +80,8 @@ TWProjectUploader.propTypes = {
 
 const mapStateToProps = state => ({
     alertsList: state.scratchGui.alerts.alertsList,
-    projectChanged: state.scratchGui.projectChanged
+    projectChanged: state.scratchGui.projectChanged, 
+    projectId: state.scratchGui.projectState.projectId
 });
 
 export default connect(
