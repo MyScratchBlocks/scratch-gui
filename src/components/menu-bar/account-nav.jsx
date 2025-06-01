@@ -4,50 +4,132 @@ Nearly identical code appears in scratch-www, and the two should
 eventually be consolidated.
 */
 
-import {injectIntl} from 'react-intl';
+import classNames from 'classnames';
+import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
 
-import AccountNavComponent from '../components/menu-bar/account-nav.jsx';
+import MenuBarMenu from './menu-bar-menu.jsx';
+import {MenuSection} from '../menu/menu.jsx';
+import MenuItemContainer from '../../containers/menu-item.jsx';
+import UserAvatar from './user-avatar.jsx';
+import dropdownCaret from './dropdown-caret.svg';
 
-const AccountNav = function (props) {
-    const {
-        ...componentProps
-    } = props;
-    return (
-        <AccountNavComponent
-            {...componentProps}
-        />
-    );
-};
+import styles from './account-nav.css';
 
-AccountNav.propTypes = {
+const AccountNavComponent = ({
+    className,
+    classroomId,
+    isEducator,
+    isOpen,
+    isRtl,
+    isStudent,
+    menuBarMenuClassName,
+    onClick,
+    onClose,
+    onLogOut,
+    profileUrl,
+    thumbnailUrl,
+    username
+}) => (
+    <React.Fragment>
+        <div
+            className={classNames(
+                styles.userInfo,
+                className
+            )}
+            onMouseUp={onClick}
+        >
+            {thumbnailUrl ? (
+                <UserAvatar
+                    className={styles.avatar}
+                    imageUrl={thumbnailUrl}
+                />
+            ) : null}
+            <span className={styles.profileName}>
+                {username}
+            </span>
+            <div className={styles.dropdownCaretPosition}>
+                <img
+                    className={styles.dropdownCaretIcon}
+                    src={dropdownCaret}
+                />
+            </div>
+        </div>
+        <MenuBarMenu
+            className={menuBarMenuClassName}
+            open={isOpen}
+            // note: the Rtl styles are switched here, because this menu is justified
+            // opposite all the others
+            place={isRtl ? 'right' : 'left'}
+            onRequestClose={onClose}
+        >
+            <MenuItemContainer href={profileUrl}>
+                <FormattedMessage
+                    defaultMessage="Profile"
+                    description="Text to link to my user profile, in the account navigation menu"
+                    id="gui.accountMenu.profile"
+                />
+            </MenuItemContainer>
+            <MenuItemContainer href="/mystuff/">
+                <FormattedMessage
+                    defaultMessage="My Stuff"
+                    description="Text to link to list of my projects, in the account navigation menu"
+                    id="gui.accountMenu.myStuff"
+                />
+            </MenuItemContainer>
+            {isEducator ? (
+                <MenuItemContainer href="/educators/classes/">
+                    <FormattedMessage
+                        defaultMessage="My Classes"
+                        description="Text to link to my classes (if I am a teacher), in the account navigation menu"
+                        id="gui.accountMenu.myClasses"
+                    />
+                </MenuItemContainer>
+            ) : null}
+            {isStudent ? (
+                <MenuItemContainer href={`/classes/${classroomId}/`}>
+                    <FormattedMessage
+                        defaultMessage="My Class"
+                        description="Text to link to my class (if I am a student), in the account navigation menu"
+                        id="gui.accountMenu.myClass"
+                    />
+                </MenuItemContainer>
+            ) : null}
+            <MenuItemContainer href="/accounts/settings/">
+                <FormattedMessage
+                    defaultMessage="Account settings"
+                    description="Text to link to my account settings, in the account navigation menu"
+                    id="gui.accountMenu.accountSettings"
+                />
+            </MenuItemContainer>
+            <MenuSection>
+                <MenuItemContainer onClick={onLogOut}>
+                    <FormattedMessage
+                        defaultMessage="Sign out"
+                        description="Text to link to sign out, in the account navigation menu"
+                        id="gui.accountMenu.signOut"
+                    />
+                </MenuItemContainer>
+            </MenuSection>
+        </MenuBarMenu>
+    </React.Fragment>
+);
+
+AccountNavComponent.propTypes = {
+    className: PropTypes.string,
     classroomId: PropTypes.string,
     isEducator: PropTypes.bool,
+    isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
     isStudent: PropTypes.bool,
+    menuBarMenuClassName: PropTypes.string,
+    onClick: PropTypes.func,
+    onClose: PropTypes.func,
+    onLogOut: PropTypes.func,
     profileUrl: PropTypes.string,
     thumbnailUrl: PropTypes.string,
     username: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-    classroomId: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.classroomId : '',
-    isEducator: state.session && state.session.permissions && state.session.permissions.educator,
-    isStudent: state.session && state.session.permissions && state.session.permissions.student,
-    profileUrl: state.session && state.session.session && state.session.session.user ?
-        `/users/${state.session.session.user.username}` : '',
-    thumbnailUrl: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.thumbnailUrl : null,
-    username: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.username : ''
-});
-
-const mapDispatchToProps = () => ({});
-
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AccountNav));
+export default AccountNavComponent;
