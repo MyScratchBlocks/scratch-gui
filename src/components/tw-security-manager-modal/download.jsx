@@ -54,7 +54,7 @@ const DEFINITELY_EXECUTABLE = [
     'webloc',
     'inetloc',
     'lnk',
-    'shortcuts',
+    'shortcut',
 
     // Windows scripting languages
     'bat',
