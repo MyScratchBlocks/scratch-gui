@@ -198,8 +198,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM)
     };
     ProjectFetcherComponent.defaultProps = {
-        assetHost: 'https://corsproxy.io/?url=https://Editor-Compiler.onrender.com/assets',
-        projectHost: 'https://corsproxy.io/?url=https://Editor-Compiler.onrender.com/json'
+        assetHost: 'https://Editor-Compiler.onrender.com/assets',
+        projectHost: 'https://Editor-Compiler.onrender.com/json'
     };
 
     const mapStateToProps = state => ({
