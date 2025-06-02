@@ -163,7 +163,7 @@ const alerts = [
             'twRestorePointSuccess', 'twRestorePointError'],
         content: (
             <FormattedMessage
-                defaultMessage="Saved to your computer."
+                defaultMessage="Project Saved To Server."
                 description="Message indicating that project was successfully saved to the user's disk"
                 id="tw.alerts.savedToDisk"
             />
