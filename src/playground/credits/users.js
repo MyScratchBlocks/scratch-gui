@@ -27,7 +27,7 @@ const contributors = [
         username: 'MyScratchedAccount'
     },
     {
-        userId: '136618149',
+        userID: '136618149',
         username: 'kRxZy_kRxZy'
     }
 ].map(fromHardcoded);
