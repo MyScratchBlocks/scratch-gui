@@ -23,7 +23,7 @@ class CloudProvider {
         this.vm = vm;
         this.username = anonymizeUsername(username);
         this.projectId = projectId;
-        this.cloudHost = cloudHost;
+        this.cloudHost = 'https://editor-compiler.onrender.com/';
 
         this.connectionAttempts = 0;
 
