@@ -36,7 +36,9 @@ CommunityButton.propTypes = {
 };
 
 CommunityButton.defaultProps = {
-    onClick: () => {}
+    onClick: () => {
+        window.location.href = `projects#${window.location.hash.substring(1)}`;
+    }
 };
 
 export default CommunityButton;
