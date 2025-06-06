@@ -139,7 +139,7 @@ const PromptComponent = props => (
                 <Box className={styles.infoMessage}>
                     <FormattedMessage
                         // eslint-disable-next-line max-len
-                        defaultMessage="If you make this cloud variable, the project will exceed Scratch's limit of {number} variables, and some variables will not function if you upload the project to Scratch."
+                        defaultMessage="If you make this cloud variable, the project will exceed MyScratchBlock's limit of {number} variables, and some variables will not function if you upload the project to MyScratchBlocks."
                         // eslint-disable-next-line max-len
                         description="Warning that appears when adding a new cloud variable will make it exceeded Scratch's cloud variable limit. number will be 10."
                         id="tw.scratchUnsafeCloud"
@@ -155,7 +155,7 @@ const PromptComponent = props => (
                     {isScratchDesktop() ? (
                         <FormattedMessage
                             // eslint-disable-next-line max-len
-                            defaultMessage="In the desktop app, cloud variables sync between all desktop app windows on this computer. Upload the project to Scratch or use a tool like the {packager} for them to sync globally."
+                            defaultMessage="Cloud Variables Are Stored On The Cloud And Allow You To Make Online Games And More."
                             description="Appears when creating a cloud variable in the desktop app"
                             values={{
                                 packager: <Packager />
@@ -165,7 +165,7 @@ const PromptComponent = props => (
                     ) : (
                         <FormattedMessage
                             /* eslint-disable-next-line max-len */
-                            defaultMessage="Although you can create cloud variables, they won't work unless this project is uploaded to Scratch or converted using a tool like the {packager}."
+                            defaultMessage="Cloud Variables Are Stored On The Cloud And Allow You To Make Online Games And More."
                             // eslint-disable-next-line max-len
                             description="Reminder that cloud variables may not work when the editor is open. {packager} is replaced with a link to open the TurboWarp Packager, always English."
                             values={{
