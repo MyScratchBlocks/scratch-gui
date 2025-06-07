@@ -13,17 +13,17 @@ import isScratchDesktop from '../../lib/isScratchDesktop.js';
 
 const messages = defineMessages({
     forAllSpritesMessage: {
-        defaultMessage: 'For all sprites',
+        defaultMessage: 'Allow all sprites',
         description: 'Option message when creating a variable for making it available to all sprites',
         id: 'gui.gui.variableScopeOptionAllSprites'
     },
     forThisSpriteMessage: {
-        defaultMessage: 'For this sprite only',
+        defaultMessage: 'Restrict to this sprite only',
         description: 'Option message when creating a varaible for making it only available to the current sprite',
         id: 'gui.gui.variableScopeOptionSpriteOnly'
     },
     cloudVarOptionMessage: {
-        defaultMessage: 'Cloud variable (stored on server)',
+        defaultMessage: 'Mark this variable as a cloud variable (stored on server)',
         description: 'Option message when creating a variable for making it a cloud variable, a variable that is stored on the server', /* eslint-disable-line max-len */
         id: 'gui.gui.cloudVariableOption'
     },
@@ -43,7 +43,7 @@ const messages = defineMessages({
 
 const Packager = () => (
     <a
-        href="https://packager.turbowarp.org"
+        href="https://myscratchblocks.github.io/packager"
         target="_blank"
         rel="noopener noreferrer"
     >
@@ -139,9 +139,9 @@ const PromptComponent = props => (
                 <Box className={styles.infoMessage}>
                     <FormattedMessage
                         // eslint-disable-next-line max-len
-                        defaultMessage="If you make this cloud variable, the project will exceed MyScratchBlock's limit of {number} variables, and some variables will not function if you upload the project to MyScratchBlocks."
+                        defaultMessage="If you make this cloud variable, the project will exceed MyScratchBlocks's limit of {number} variables, and some variables will not function if you upload the project to MyScratchBlocks. If you do this, you can still use the packager and get unlimited cloud variables."
                         // eslint-disable-next-line max-len
-                        description="Warning that appears when adding a new cloud variable will make it exceeded Scratch's cloud variable limit. number will be 10."
+                        description="Warning that appears when adding a new cloud variable will make it exceeded MyScratchBlocks's cloud variable limit. number will be 10."
                         id="tw.scratchUnsafeCloud"
                         values={{
                             number: SCRATCH_MAX_CLOUD_VARIABLES
@@ -155,7 +155,7 @@ const PromptComponent = props => (
                     {isScratchDesktop() ? (
                         <FormattedMessage
                             // eslint-disable-next-line max-len
-                            defaultMessage="Cloud Variables Are Stored On The Cloud And Allow You To Make Online Games And More."
+                            defaultMessage="Cloud Variables Are Stored On The Server. This gives you the abilty to create online games, currencies, safe chatrooms and many more. You can have up to 250 cloud variables."
                             description="Appears when creating a cloud variable in the desktop app"
                             values={{
                                 packager: <Packager />
@@ -165,7 +165,7 @@ const PromptComponent = props => (
                     ) : (
                         <FormattedMessage
                             /* eslint-disable-next-line max-len */
-                            defaultMessage="Cloud Variables Are Stored On The Cloud And Allow You To Make Online Games And More."
+                            defaultMessage="Cloud Variables Are Stored On The Cloud And Allow You To Make Online Games And More. You can learn more about the MyScratchBlocks packager at {packager}."
                             // eslint-disable-next-line max-len
                             description="Reminder that cloud variables may not work when the editor is open. {packager} is replaced with a link to open the TurboWarp Packager, always English."
                             values={{
@@ -193,7 +193,7 @@ const PromptComponent = props => (
                     onClick={props.onOk}
                 >
                     <FormattedMessage
-                        defaultMessage="OK"
+                        defaultMessage="Create / Edit"
                         description="Button in prompt for confirming the dialog"
                         id="gui.prompt.ok"
                     />
