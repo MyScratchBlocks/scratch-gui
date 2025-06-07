@@ -165,7 +165,7 @@ const PromptComponent = props => (
                     ) : (
                         <FormattedMessage
                             /* eslint-disable-next-line max-len */
-                            defaultMessage="Cloud Variables Are Stored On The Cloud And Allow You To Make Online Games And More. Since you are in the desktop app, cloud variables will only sync after being uploaded to the packager and a vaild cloud server being set up. Don't have one? Upload it to MyScratchBlocks which offers free hosting for cloud variables. You can learn more about the MyScratchBlocks packager at {packager}."
+                            defaultMessage="Cloud Variables Are Stored On The Server. This gives you the abilty to create online games, currencies, safe chatrooms and many more. You can have up to 250 cloud variables."
                             // eslint-disable-next-line max-len
                             description="Reminder that cloud variables may not work when the editor is open. {packager} is replaced with a link to open the TurboWarp Packager, always English."
                             values={{
