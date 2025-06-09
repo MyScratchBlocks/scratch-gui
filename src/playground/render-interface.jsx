@@ -228,9 +228,10 @@ class Interface extends React.Component {
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
 
-        if(isHomepage) {
-           window.location.href = `https://myscratchblock.github.io/projects#${window.location.hash.substring(1)}`;
+        if (isHomepage) {
+          window.open(`https://myscratchblock.github.io/projects#${window.location.hash.substring(1)}`, '_blank');
         }
+
         
         return (
             <div className={classNames(styles.container, {
