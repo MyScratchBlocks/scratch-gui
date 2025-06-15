@@ -1,27 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import log from './log';
 
-import {setProjectTitle} from '../reducers/project-title';
-import {setAuthor, setDescription} from '../reducers/tw';
+import { setProjectTitle } from '../reducers/project-title';
+import { setAuthor, setDescription } from '../reducers/tw';
 
 export const fetchProjectMeta = async projectId => {
     const urls = [
         `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta`,
         `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta`
     ];
+
+    const token = localStorage.getItem('username'); // Replace with actual token key if needed
     let firstError;
+
     for (const url of urls) {
         try {
-            const res = await fetch(url);
+            const res = await fetch(url, {
+                headers: {
+                    'Authorization': `${token}`
+                }
+            });
+
             const data = await res.json();
+
             if (res.ok) {
                 return data;
             }
+
             if (res.status === 404) {
                 throw new Error('Project is probably unshared');
             }
+
             throw new Error(`Unexpected status code: ${res.status}`);
         } catch (err) {
             if (!firstError) {
@@ -29,10 +40,12 @@ export const fetchProjectMeta = async projectId => {
             }
         }
     }
+
     throw firstError;
 };
 
 const getNoIndexTag = () => document.querySelector('meta[name="robots"][content="noindex"]');
+
 const setIndexable = indexable => {
     if (indexable) {
         const tag = getNoIndexTag();
@@ -49,7 +62,7 @@ const setIndexable = indexable => {
 
 const TWProjectMetaFetcherHOC = function (WrappedComponent) {
     class ProjectMetaFetcherComponent extends React.Component {
-        componentDidUpdate (prevProps) {
+        componentDidUpdate(prevProps) {
             // project title resetting is handled in titled-hoc.jsx
             if (this.props.reduxProjectId !== prevProps.reduxProjectId) {
                 this.props.onSetAuthor('', '');
@@ -69,27 +82,30 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                         if (title) {
                             this.props.onSetProjectTitle(title);
                         }
+
                         const authorName = data.author.username;
                         const authorThumbnail = `https://trampoline.turbowarp.org/avatars/${data.author.id}`;
                         this.props.onSetAuthor(authorName, authorThumbnail);
+
                         const instructions = data.instructions || '';
                         const credits = data.description || '';
                         if (instructions || credits) {
                             this.props.onSetDescription(instructions, credits);
                         }
+
                         setIndexable(true);
-                    })
-                        .catch(err => {
-                            setIndexable(false);
-                            if (`${err}`.includes('unshared')) {
-                                this.props.onSetDescription('unshared', 'unshared');
-                            }
-                            log.warn('cannot fetch project meta', err);
-                        });
+                    }).catch(err => {
+                        setIndexable(false);
+                        if (`${err}`.includes('unshared')) {
+                            this.props.onSetDescription('unshared', 'unshared');
+                        }
+                        log.warn('cannot fetch project meta', err);
+                    });
                 }
             }
         }
-        render () {
+
+        render() {
             const {
                 /* eslint-disable no-unused-vars */
                 reduxProjectId,
@@ -106,26 +122,24 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             );
         }
     }
+
     ProjectMetaFetcherComponent.propTypes = {
         reduxProjectId: PropTypes.string,
         onSetAuthor: PropTypes.func,
         onSetDescription: PropTypes.func,
         onSetProjectTitle: PropTypes.func
     };
+
     const mapStateToProps = state => ({
         reduxProjectId: state.scratchGui.projectState.projectId
     });
+
     const mapDispatchToProps = dispatch => ({
-        onSetAuthor: (username, thumbnail) => dispatch(setAuthor({
-            username,
-            thumbnail
-        })),
-        onSetDescription: (instructions, credits) => dispatch(setDescription({
-            instructions,
-            credits
-        })),
+        onSetAuthor: (username, thumbnail) => dispatch(setAuthor({ username, thumbnail })),
+        onSetDescription: (instructions, credits) => dispatch(setDescription({ instructions, credits })),
         onSetProjectTitle: title => dispatch(setProjectTitle(title))
     });
+
     return connect(
         mapStateToProps,
         mapDispatchToProps
