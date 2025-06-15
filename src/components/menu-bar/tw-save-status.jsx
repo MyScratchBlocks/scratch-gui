@@ -20,7 +20,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
             formData.append('project', file);
 
             // Use projectId directly without "this.props"
-            const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${projectId || window.location.hash.substring(1)}/meta`);
+            const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${projectId || window.location.hash.substring(1)}/meta/${localStorage.getItem('username')}`);
             const meta = await metaRes.json();
             formData.append('projectName', meta.title);
 
@@ -50,7 +50,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
             }
         } catch (error) {
             console.error('Failed to upload project:', error);
-            alert("Failed to save project. Please Try Again!");
+            alert(error);
         }
     };
 
