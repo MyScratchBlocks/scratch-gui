@@ -11,7 +11,7 @@ const decorate = text => {
     // Make @mentions clickable
     text = reactStringReplace(text, /@([\w-]+)/, (match, i) => (
         <a
-            href={`https://scratch.mit.edu/users/${match}/`}
+            href={`https://myscratchblocks.github.io/users?user=${match}/`}
             rel="noreferrer"
             key={match + i}
         >{`@${match}`}</a>
@@ -30,7 +30,7 @@ const decorate = text => {
     // Make hashtags clickable
     text = reactStringReplace(text, /#([\w-]+)/g, (match, i) => (
         <a
-            href={`https://scratch.mit.edu/search/projects?q=${match}`}
+            href={`https://myscratchblocks.github.io/projects#${match}`}
             key={match + i}
         >{`#${match}`}</a>
     ));
@@ -46,13 +46,13 @@ const Description = ({
     <div className={styles.description}>
         <div className={styles.projectLink}>
             <a
-                href={`https://scratch.mit.edu/projects/${projectId}/`}
+                href={`https://myscratchblocks.github.io/projects#${projectId}/`}
                 target="_blank"
                 rel="noreferrer"
             >
                 <FormattedMessage
-                    defaultMessage="View project on Scratch"
-                    description="Link to view project on Scratch"
+                    defaultMessage="View project on myscratchblocks.github.io"
+                    description="Link to view project on myscratchblocks.github.io"
                     id="tw.viewOnScratch"
                 />
             </a>
@@ -76,7 +76,7 @@ const Description = ({
             <div>
                 <h2 className={styles.header}>
                     <FormattedMessage
-                        defaultMessage="Notes and Credits"
+                        defaultMessage="Description"
                         description="Header for notes and credits section of description"
                         id="tw.home.credit"
                     />
