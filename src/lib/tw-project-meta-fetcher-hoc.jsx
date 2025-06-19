@@ -8,8 +8,8 @@ import { setAuthor, setDescription } from '../reducers/tw';
 
 export const fetchProjectMeta = async projectId => {
     const urls = [
-        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username')}`,
-        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username')}`
+        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}`,
+        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}`
     ];
 
     const token = localStorage.getItem('username'); // Replace with actual token key if needed
