@@ -24,6 +24,10 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
     const handleSaveAndUpload = async () => {
         // Set text to "saving..." when the save process begins
         setSaveStatusText('Saving...');
+        if (!localStorage.getItem('username')) {
+            setSaveStatusText('Login To Save!');
+            return;
+        }
 
         try {
             // Ensure vm is defined. If it's a global, you might need `window.vm` or pass it as a prop.
