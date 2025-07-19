@@ -12,6 +12,16 @@ export const fetchProjectMeta = async projectId => {
         `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}`
     ];
 
+    import { useLocation } from 'react-router-dom';
+
+    const { search } = useLocation();
+    const params = new URLSearchParams(search);
+    if (params.get('Admin') === 'True') {
+      const urls = [
+          `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}?Admin=True`,
+          `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}?Admin=True`
+      ]; 
+    
     const token = localStorage.getItem('username'); // Replace with actual token key if needed
     let firstError;
 
