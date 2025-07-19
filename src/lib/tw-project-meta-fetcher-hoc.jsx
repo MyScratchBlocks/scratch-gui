@@ -1,3 +1,9 @@
+ as default
+};
+
+};
+
+export
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,23 +12,18 @@ import log from './log';
 import { setProjectTitle } from '../reducers/project-title';
 import { setAuthor, setDescription } from '../reducers/tw';
 
+// Fetch metadata for a project
 export const fetchProjectMeta = async projectId => {
+    const username = localStorage.getItem('username') || 'test';
+    const token = username; // Replace with actual token key if needed
+
+    const isAdmin = new URLSearchParams(window.location.search).get('Admin') === 'True';
+
+    const query = isAdmin ? '?Admin=True' : '';
     const urls = [
-        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}`,
-        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}`
+        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${username}${query}`
     ];
 
-    import { useLocation } from 'react-router-dom';
-
-    const { search } = useLocation();
-    const params = new URLSearchParams(search);
-    if (params.get('Admin') === 'True') {
-      const urls = [
-          `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}?Admin=True`,
-          `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${localStorage.getItem('username') || 'test'}?Admin=True`
-      ]; 
-    
-    const token = localStorage.getItem('username'); // Replace with actual token key if needed
     let firstError;
 
     for (const url of urls) {
@@ -54,14 +55,13 @@ export const fetchProjectMeta = async projectId => {
     throw firstError;
 };
 
+// Meta tag helper
 const getNoIndexTag = () => document.querySelector('meta[name="robots"][content="noindex"]');
 
 const setIndexable = indexable => {
     if (indexable) {
         const tag = getNoIndexTag();
-        if (tag) {
-            tag.remove();
-        }
+        if (tag) tag.remove();
     } else if (!getNoIndexTag()) {
         const tag = document.createElement('meta');
         tag.name = 'robots';
@@ -70,66 +70,63 @@ const setIndexable = indexable => {
     }
 };
 
+// Higher-order component
 const TWProjectMetaFetcherHOC = function (WrappedComponent) {
     class ProjectMetaFetcherComponent extends React.Component {
         componentDidUpdate(prevProps) {
-            // project title resetting is handled in titled-hoc.jsx
             if (this.props.reduxProjectId !== prevProps.reduxProjectId) {
                 this.props.onSetAuthor('', '');
                 this.props.onSetDescription('', '');
                 const projectId = this.props.reduxProjectId;
 
                 if (projectId === '0') {
-                    // don't try to get metadata
-                } else {
-                    fetchProjectMeta(projectId).then(data => {
-                        // If project ID changed, ignore the results.
-                        if (this.props.reduxProjectId !== projectId) {
-                            return;
-                        }
-
-                        const title = data.title;
-                        if (title) {
-                            this.props.onSetProjectTitle(title);
-                        }
-
-                        const authorName = data.author.username;
-                        const authorThumbnail = `https://trampoline.turbowarp.org/avatars/${data.author.id}`;
-                        this.props.onSetAuthor(authorName, authorThumbnail);
-
-                        const instructions = data.instructions || '';
-                        const credits = data.description || '';
-                        if (instructions || credits) {
-                            this.props.onSetDescription(instructions, credits);
-                        }
-
-                        setIndexable(true);
-                    }).catch(err => {
-                        setIndexable(false);
-                        if (`${err}`.includes('unshared')) {
-                            this.props.onSetDescription('unshared', 'unshared');
-                        }
-                        log.warn('cannot fetch project meta', err);
-                    });
+                    // Skip fetching for default ID
+                    return;
                 }
+
+                fetchProjectMeta(projectId).then(data => {
+                    if (this.props.reduxProjectId !== projectId) {
+                        return; // Ignore stale response
+                    }
+
+                    const title = data.title;
+                    if (title) {
+                        this.props.onSetProjectTitle(title);
+                    }
+
+                    const authorName = data.author.username;
+                    const authorThumbnail = `https://trampoline.turbowarp.org/avatars/${data.author.id}`;
+                    this.props.onSetAuthor(authorName, authorThumbnail);
+
+                    const instructions = data.instructions || '';
+                    const credits = data.description || '';
+                    if (instructions || credits) {
+                        this.props.onSetDescription(instructions, credits);
+                    }
+
+                    setIndexable(true);
+                }).catch(err => {
+                    setIndexable(false);
+                    if (`${err}`.includes('unshared')) {
+                        this.props.onSetDescription('unshared', 'unshared');
+                    }
+                    log.warn('cannot fetch project meta', err);
+                });
             }
         }
 
         render() {
             const {
-                /* eslint-disable no-unused-vars */
+                // eslint-disable-next-line no-unused-vars
                 reduxProjectId,
                 onSetAuthor,
                 onSetDescription,
                 onSetProjectTitle,
-                /* eslint-enable no-unused-vars */
+                // eslint-enable-next-line no-unused-vars
                 ...props
             } = this.props;
-            return (
-                <WrappedComponent
-                    {...props}
-                />
-            );
+
+            return <WrappedComponent {...props} />;
         }
     }
 
@@ -150,10 +147,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
         onSetProjectTitle: title => dispatch(setProjectTitle(title))
     });
 
-    return connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(ProjectMetaFetcherComponent);
+    return connect(mapStateToProps, mapDispatchToProps)(ProjectMetaFetcherComponent);
 };
 
 export {
