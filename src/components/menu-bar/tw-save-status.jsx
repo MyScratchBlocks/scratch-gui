@@ -1,18 +1,14 @@
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
-import React, {useState} from 'react'; // Import useState
+import React, {useRef, useState} from 'react';
 import InlineMessages from '../../containers/inline-messages.jsx';
 import {filterInlineAlerts} from '../../reducers/alerts';
-import VM from 'scratch-vm'; // Assuming 'vm' is globally accessible or passed as a prop
+import VM from 'scratch-vm';
 
 import styles from './save-status.css';
 
-/**
- * Uploads the current project to the server.
- */
 const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
-    // Initialize state for the save status text
     const [saveStatusText, setSaveStatusText] = useState(
         <FormattedMessage
             defaultMessage="Save Now"
@@ -21,33 +17,40 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
         />
     );
 
-    const handleSaveAndUpload = async () => {
-        // Set text to "saving..." when the save process begins
-        setSaveStatusText('Saving...');
+    const fileInputRef = useRef(null); // Reference to the hidden file input
+
+    const handleSaveClick = () => {
         if (!localStorage.getItem('username')) {
             setSaveStatusText('Login To Save!');
             return;
         }
+        fileInputRef.current.click(); // Trigger file input dialog
+    };
+
+    const handleFileChange = async (event) => {
+        const thumbnailFile = event.target.files[0];
+        if (!thumbnailFile) return;
+
+        setSaveStatusText('Saving...');
 
         try {
-            // Ensure vm is defined. If it's a global, you might need `window.vm` or pass it as a prop.
-            // For now, assuming it's accessible.
-            const blob = await vm.saveProjectSb3(); 
-            const file = new File([blob], 'project.sb3', {type: 'application/zip'});
+            const blob = await vm.saveProjectSb3();
+            const projectFile = new File([blob], 'project.sb3', {type: 'application/zip'});
             const formData = new FormData();
-            formData.append('project', file);
+            formData.append('project', projectFile);
+            formData.append('thumbnail', thumbnailFile); // Append thumbnail
 
             const currentProjectId = projectId || window.location.hash.substring(1);
-
             const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${currentProjectId}/meta/${localStorage.getItem('username')}`);
             const meta = await metaRes.json();
-            formData.append('projectName', meta.title);
 
             if (meta.error) {
                 console.error(meta.error);
-                setSaveStatusText('Save Failed!'); // Set status on error
+                setSaveStatusText('Save Failed!');
                 return;
             }
+
+            formData.append('projectName', meta.title);
 
             if (meta.author?.username === localStorage.getItem('username')) {
                 const uploadEndpoint = `https://editor-compiler.onrender.com/${currentProjectId}/save`;
@@ -59,22 +62,21 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
 
                 if (res.error) {
                     console.error(res.error);
-                    setSaveStatusText('Save Failed!'); // Set status on error
+                    setSaveStatusText('Save Failed!');
                     return;
                 }
 
                 console.log('Project uploaded successfully.');
-                setSaveStatusText('Saved!'); // Set text to "Saved!" on success
+                setSaveStatusText('Saved!');
             } else {
                 console.warn('Not authorized to upload this project.');
-                setSaveStatusText("Not authorized!"); // Set status for unauthorized access
+                setSaveStatusText("Not authorized!");
             }
         } catch (error) {
             console.error('Failed to upload project:', error);
-            setSaveStatusText('Save Failed!'); // Set status on error
+            setSaveStatusText('Save Failed!');
         }
-        // You might want to reset the text after a short delay or on next interaction
-        // For example, after 3 seconds, set it back to "Save Now"
+
         setTimeout(() => {
             setSaveStatusText(
                 <FormattedMessage
@@ -83,7 +85,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
                     id="tw.menuBar.saveNow"
                 />
             );
-        }, 3000); 
+        }, 3000);
     };
 
     if (filterInlineAlerts(alertsList).length > 0) {
@@ -91,11 +93,17 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
     }
 
     return (
-        <div
-            onClick={handleSaveAndUpload}
-            className={styles.saveNow}
-        >
-            {saveStatusText}
+        <div>
+            <div onClick={handleSaveClick} className={styles.saveNow}>
+                {saveStatusText}
+            </div>
+            <input
+                type="file"
+                accept="image/*"
+                style={{display: 'none'}}
+                ref={fileInputRef}
+                onChange={handleFileChange}
+            />
         </div>
     );
 };
