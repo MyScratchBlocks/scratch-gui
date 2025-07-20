@@ -24,6 +24,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
             setSaveStatusText('Login To Save!');
             return;
         }
+        alert("Please Upload A Thumbnail!");
         fileInputRef.current.click(); // Trigger file input dialog
     };
 
