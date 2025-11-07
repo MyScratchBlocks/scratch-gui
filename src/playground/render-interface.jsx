@@ -189,7 +189,7 @@ class Interface extends React.Component {
             const projectId = window.location.hash.substring(1);
             if (!projectId) return;
 
-            const response = await fetch(`https://editor-compiler.onrender.com/${projectId}/save`, {
+            const response = await fetch(`https://sl-api-v1.onrender.com/${projectId}/save`, {
                 method: 'POST',
                 body: formData
             });
