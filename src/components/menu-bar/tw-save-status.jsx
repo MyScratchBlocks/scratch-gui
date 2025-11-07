@@ -42,7 +42,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
             formData.append('thumbnail', thumbnailFile); // Append thumbnail
 
             const currentProjectId = projectId || window.location.hash.substring(1);
-            const metaRes = await fetch(`https://sl-api-v1.onrender.com/api/projects/${currentProjectId}/meta/${localStorage.getItem('username')}`);
+            const metaRes = await fetch(`https://sl-api-v1.onrender.com/api/projects/${currentProjectId}/meta/${window.parent.username}`);
             const meta = await metaRes.json();
 
             if (meta.error) {
