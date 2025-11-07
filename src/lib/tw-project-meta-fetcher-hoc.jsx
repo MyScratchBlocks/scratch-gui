@@ -15,7 +15,7 @@ export const fetchProjectMeta = async projectId => {
 
     const query = isAdmin ? '?Admin=True' : '';
     const urls = [
-        `https://Editor-Compiler.onrender.com/api/projects/${projectId}/meta/${username}${query}`
+        `https://sl-api-v1.onrender.com/api/projects/${projectId}/meta/${username}${query}`
     ];
 
     let firstError;
