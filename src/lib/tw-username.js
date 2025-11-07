@@ -1,5 +1,5 @@
 const generateRandomUsername = () => {
-  let username = localStorage.getItem('username');
+  let username = window.parent.username;
   
   if (username && username !== "") {
     return username;
@@ -7,7 +7,7 @@ const generateRandomUsername = () => {
     const DIGITS = 4;
     const randomNumber = Math.floor(Math.random() * (10 ** DIGITS));
     const randomId = randomNumber.toString().padStart(DIGITS, '0');
-    const randomUsername = `MyScratchBlocks-${randomId}`;   
+    const randomUsername = `SnapLabs-${randomId}`;   
     return randomUsername;
   }
 };
