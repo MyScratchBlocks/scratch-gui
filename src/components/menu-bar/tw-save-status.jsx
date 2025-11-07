@@ -20,7 +20,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
     const fileInputRef = useRef(null); // Reference to the hidden file input
 
     const handleSaveClick = () => {
-        if (!localStorage.getItem('username')) {
+        if (!window.parent.username) {
             setSaveStatusText('Login To Save!');
             return;
         }
@@ -42,7 +42,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
             formData.append('thumbnail', thumbnailFile); // Append thumbnail
 
             const currentProjectId = projectId || window.location.hash.substring(1);
-            const metaRes = await fetch(`https://editor-compiler.onrender.com/api/projects/${currentProjectId}/meta/${localStorage.getItem('username')}`);
+            const metaRes = await fetch(`https://sl-api-v1.onrender.com/api/projects/${currentProjectId}/meta/${localStorage.getItem('username')}`);
             const meta = await metaRes.json();
 
             if (meta.error) {
@@ -53,8 +53,8 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
 
             formData.append('projectName', meta.title);
 
-            if (meta.author?.username === localStorage.getItem('username')) {
-                const uploadEndpoint = `https://editor-compiler.onrender.com/${currentProjectId}/save`;
+            if (meta.author?.username === window.parent.username) {
+                const uploadEndpoint = `https://sl-api-v1.onrender.com/${currentProjectId}/save`;
                 const uploadRes = await fetch(uploadEndpoint, {
                     method: 'POST',
                     body: formData
