@@ -8,7 +8,7 @@ import { setAuthor, setDescription } from '../reducers/tw';
 
 // Fetch metadata for a project
 export const fetchProjectMeta = async projectId => {
-    const username = localStorage.getItem('username') || 'test';
+    const username = window.parent.username || 'test';
     const token = username; // Replace with actual token key if needed
 
     const isAdmin = new URLSearchParams(window.location.search).get('Admin') === 'True';
