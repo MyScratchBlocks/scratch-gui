@@ -198,8 +198,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM)
     };
     ProjectFetcherComponent.defaultProps = {
-        assetHost: 'https://Editor-Compiler.onrender.com/assets',
-        projectHost: 'https://Editor-Compiler.onrender.com/json'
+        assetHost: 'https://sl-api-v1.onrender.com/assets',
+        projectHost: 'https://sl-api-v1.onrender.com/json'
     };
 
     const mapStateToProps = state => ({
