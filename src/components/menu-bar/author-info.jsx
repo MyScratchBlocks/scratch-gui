@@ -56,7 +56,7 @@ const AuthorInfo = ({projectId, ...props}) => (
     projectId ? (
         <a
             className={styles.link}
-            href={`https://myscratchblocks.github.io/projects#${projectId}`}
+            href={`https://snaplabs.js.org/projects/${projectId}`}
             target="_blank"
             rel="noreferrer"
         >
