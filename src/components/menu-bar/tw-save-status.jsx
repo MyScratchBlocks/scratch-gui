@@ -20,7 +20,7 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
     const fileInputRef = useRef(null); // Reference to the hidden file input
 
     const handleSaveClick = () => {
-        if (!window.parent.username) {
+        if (!new URLSearchParams(window.location.search).get('username')) {
             setSaveStatusText('Login To Save!');
             return;
         }
