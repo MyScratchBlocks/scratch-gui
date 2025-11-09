@@ -1,5 +1,5 @@
 const generateRandomUsername = () => {
-  let username = window.parent.username;
+  let username = new URLSearchParams(window.location.search).get('username');
   
   if (username && username !== "") {
     return username;
