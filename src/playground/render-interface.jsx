@@ -229,7 +229,7 @@ class Interface extends React.Component {
         const isEditor = !isPlayerOnly;
 
         if (isHomepage) {
-          window.open(`https://myscratchblocks.github.io/projects#${window.location.hash.substring(1)}`, '_blank');
+          window.open(`https://snaplabs.js.org/projects/${window.location.hash.substring(1)}`, '_blank');
         }
 
         
