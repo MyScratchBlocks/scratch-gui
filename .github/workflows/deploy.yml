@@ -51,4 +51,4 @@ jobs:
           git remote add origin https://KRXZY_KRXZY:5a14a111a6bec05904942fe16e7653e8b30a2781@codeberg.org/snaplabs/idk
           git add .
           git commit -m "build editor"
-          git push
+          git push --set-upstream origin develop
