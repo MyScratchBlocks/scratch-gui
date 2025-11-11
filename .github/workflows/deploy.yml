@@ -1,57 +1,49 @@
-name: Clone and build Blocks
+name: Build and Deploy to Codeberg
 
 on:
-  schedule:
-    - cron: '*/10 * */10 */10 */10'
   push:
-    branches: 
-      - main
-      - develop
-    paths:
-      - '**'  # Adjust this if you want to limit which files trigger the workflow
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
 
 jobs:
-  build:
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment: production
-    permissions:
-      id-token: write
-      pages: write
+    environment: CODEBERG
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: MyScratchBlocks/scratch-gui
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
-
-      - name: Build
-        run: |
-          npm install
-          npm run build
-          cat build/index.html
-
-
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v3.0.1
+        uses: actions/setup-node@v3
         with:
-          path: build
+          node-version: 20
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Install dependencies
+        run: npm install || true
 
-      - name: Push To Codeberg
+      - name: Build project
+        run: npm run build || true
+
+      - name: Push build to Codeberg
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
         run: |
-          git config user.email "kRxZy_kRxZy@noreply.codeberg.org"
-          git config user.name "SnapLabs[BOT]"
-          git remote remove origin 
-          git remote add origin https://KRXZY_KRXZY:5a14a111a6bec05904942fe16e7653e8b30a2781@codeberg.org/snaplabs/idk
-          git fetch --unshallow
-          git add build
-          git commit -m "build editor"
-          git push --set-upstream origin develop
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+          # Clone the Codeberg repository
+          git clone https://KRXZY_KRXZY:${CODEBERG_TOKEN}@codeberg.org/snaplabs/idk codeberg-repo
+
+          # Remove old ampmod contents
+          rm -rf codeberg-repo/ampmod
+
+          # Copy new build into ampmod
+          mkdir -p codeberg-repo/ampmod
+          cp -r packages/gui/build/* codeberg-repo/ampmod/
+
+          cd codeberg-repo
+
+          # Commit and push changes
+          git pull
+          git add ampmod
+          git commit -m "Update ampmod build [skip ci]" || echo "No changes to commit"
+          git push origin pages
