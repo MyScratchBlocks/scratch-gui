@@ -38,12 +38,12 @@ jobs:
 
           # Copy new build into ampmod
           mkdir -p codeberg-repo/ampmod
-          cp -r packages/gui/build/* codeberg-repo/ampmod/
+          cp -r build/* codeberg-repo/ampmod/
 
           cd codeberg-repo
 
           # Commit and push changes
           git pull
           git add ampmod
-          git commit -m "Update ampmod build [skip ci]" || echo "No changes to commit"
+          git commit -m "Update build [skip ci]" || echo "No changes to commit"
           git push origin pages
