@@ -23,14 +23,12 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
         if (!new URLSearchParams(window.location.search).get('username')) {
             setSaveStatusText('Login To Save!');
             return;
+
+        handleFileChange();
         }
-        alert("Please Upload A Thumbnail!");
-        fileInputRef.current.click(); // Trigger file input dialog
     };
 
     const handleFileChange = async (event) => {
-        const thumbnailFile = event.target.files[0];
-        if (!thumbnailFile) return;
 
         setSaveStatusText('Saving...');
 
@@ -39,7 +37,6 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
             const projectFile = new File([blob], 'project.sb3', {type: 'application/zip'});
             const formData = new FormData();
             formData.append('project', projectFile);
-            formData.append('thumbnail', thumbnailFile); // Append thumbnail
 
             const currentProjectId = projectId || window.location.hash.substring(1);
             const metaRes = await fetch(`https://sl-api-v1.onrender.com/api/projects/${currentProjectId}/meta/${new URLSearchParams(window.location.search).get('username')}`);
@@ -98,13 +95,6 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
             <div onClick={handleSaveClick} className={styles.saveNow}>
                 {saveStatusText}
             </div>
-            <input
-                type="file"
-                accept="image/*"
-                style={{display: 'none'}}
-                ref={fileInputRef}
-                onChange={handleFileChange}
-            />
         </div>
     );
 };
