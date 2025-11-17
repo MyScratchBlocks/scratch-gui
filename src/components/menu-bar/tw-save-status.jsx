@@ -23,9 +23,8 @@ const TWProjectUploader = ({alertsList, projectChanged, projectId}) => {
         if (!new URLSearchParams(window.location.search).get('username')) {
             setSaveStatusText('Login To Save!');
             return;
-
+        } 
         handleFileChange();
-        }
     };
 
     const handleFileChange = async (event) => {
