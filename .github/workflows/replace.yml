@@ -1,0 +1,34 @@
+name: Replace MyScratchBlocks With SnapLabs
+
+on:
+  workflow_dispatch:   # allows manual run
+  push:
+    branches:
+      - main
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Replace text (case-insensitive)
+      run: |
+        # Replace MyScratchBlocks in any casing with SnapLabs
+        grep -ril "myscratchblocks" . | while read file; do
+          sed -i 's/MyScratchBlocks/SnapLabs/gI' "$file"
+        done
+
+    - name: Commit changes
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add -A
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+        else
+          git commit -m "Replace MyScratchBlocks with SnapLabs"
+          git push
+        fi
