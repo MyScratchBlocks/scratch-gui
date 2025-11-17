@@ -1,13 +1,18 @@
-name: Build and Deploy to Codeberg
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: CODEBERG
+    environment: github-pages
 
     steps:
       - name: Checkout repository
@@ -24,27 +29,21 @@ jobs:
       - name: Build project
         run: npm run build || true
 
-      - name: Push build to Codeberg
-        env:
-          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
+      # Upload build folder as GitHub Pages artifact
+      - name: Upload build output
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
 
-          # Clone the Codeberg repository
-          git clone https://KRXZY_KRXZY:${CODEBERG_TOKEN}@codeberg.org/snaplabs/idk codeberg-repo
+  # Deploy the uploaded artifact
+  deploy:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-          # Remove old ampmod contents
-          rm -rf codeberg-repo/ampmod
-
-          # Copy new build into ampmod
-          mkdir -p codeberg-repo/ampmod
-          cp -r build/* codeberg-repo/ampmod/
-
-          cd codeberg-repo
-
-          # Commit and push changes
-          git pull
-          git add ampmod
-          git commit -m "Update build [skip ci]" || echo "No changes to commit"
-          git push origin main
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
