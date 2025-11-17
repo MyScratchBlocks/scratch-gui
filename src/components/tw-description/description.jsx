@@ -11,7 +11,7 @@ const decorate = text => {
     // Make @mentions clickable
     text = reactStringReplace(text, /@([\w-]+)/, (match, i) => (
         <a
-            href={`https://myscratchblocks.github.io/users?user=${match}/`}
+            href={`https://SnapLabs.github.io/users?user=${match}/`}
             rel="noreferrer"
             key={match + i}
         >{`@${match}`}</a>
@@ -30,7 +30,7 @@ const decorate = text => {
     // Make hashtags clickable
     text = reactStringReplace(text, /#([\w-]+)/g, (match, i) => (
         <a
-            href={`https://myscratchblocks.github.io/projects#${match}`}
+            href={`https://SnapLabs.github.io/projects#${match}`}
             key={match + i}
         >{`#${match}`}</a>
     ));
@@ -46,13 +46,13 @@ const Description = ({
     <div className={styles.description}>
         <div className={styles.projectLink}>
             <a
-                href={`https://myscratchblocks.github.io/projects#${projectId}/`}
+                href={`https://SnapLabs.github.io/projects#${projectId}/`}
                 target="_blank"
                 rel="noreferrer"
             >
                 <FormattedMessage
-                    defaultMessage="View project on myscratchblocks.github.io"
-                    description="Link to view project on myscratchblocks.github.io"
+                    defaultMessage="View project on SnapLabs.github.io"
+                    description="Link to view project on SnapLabs.github.io"
                     id="tw.viewOnScratch"
                 />
             </a>

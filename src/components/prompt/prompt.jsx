@@ -43,7 +43,7 @@ const messages = defineMessages({
 
 const Packager = () => (
     <a
-        href="https://myscratchblocks.github.io/packager"
+        href="https://SnapLabs.github.io/packager"
         target="_blank"
         rel="noopener noreferrer"
     >
@@ -139,9 +139,9 @@ const PromptComponent = props => (
                 <Box className={styles.infoMessage}>
                     <FormattedMessage
                         // eslint-disable-next-line max-len
-                        defaultMessage="If you make this cloud variable, the project will exceed MyScratchBlocks's limit of {number} variables, and some variables will not function if you upload the project to MyScratchBlocks. If you do this, you can still use the packager and get unlimited cloud variables."
+                        defaultMessage="If you make this cloud variable, the project will exceed SnapLabs's limit of {number} variables, and some variables will not function if you upload the project to SnapLabs. If you do this, you can still use the packager and get unlimited cloud variables."
                         // eslint-disable-next-line max-len
-                        description="Warning that appears when adding a new cloud variable will make it exceeded MyScratchBlocks's cloud variable limit. number will be 10."
+                        description="Warning that appears when adding a new cloud variable will make it exceeded SnapLabs's cloud variable limit. number will be 10."
                         id="tw.scratchUnsafeCloud"
                         values={{
                             number: SCRATCH_MAX_CLOUD_VARIABLES

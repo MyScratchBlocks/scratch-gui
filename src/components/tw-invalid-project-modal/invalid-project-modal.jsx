@@ -32,7 +32,7 @@ const InvalidProjectModal = props => (
         <div className={styles.body}>
             <p>
                 <FormattedMessage
-                    defaultMessage="MyScratchBlocks could not load this project due to an error:"
+                    defaultMessage="SnapLabs could not load this project due to an error:"
                     // eslint-disable-next-line max-len
                     description="Part of modal that appears when a project could not be loaded. Followed by error message."
                     id="tw.invalidProject.error"
@@ -58,7 +58,7 @@ const InvalidProjectModal = props => (
                         values={{
                             reportIt: (
                                 <a
-                                    href="https://github.com/MyScratchBlocks/scratch%gui/issues"
+                                    href="https://github.com/SnapLabs/scratch%gui/issues"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
@@ -78,7 +78,7 @@ const InvalidProjectModal = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="You may be in luck! Check if you saved multiple copies, or check if you saved it as a unshared or shared project in your MyScratchBlocks account. You can also use the Backups feature below:"
+                    defaultMessage="You may be in luck! Check if you saved multiple copies, or check if you saved it as a unshared or shared project in your SnapLabs account. You can also use the Backups feature below:"
                     description="Part of modal that appears when a project could not be loaded."
                     id="tw.invalidProject.options"
                 />

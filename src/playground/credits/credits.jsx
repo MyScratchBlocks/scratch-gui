@@ -85,7 +85,7 @@ const Credits = () => (
             </p>
         </section>
         <section>
-            <h2>MyScratchBlocks Coders</h2>
+            <h2>SnapLabs Coders</h2>
             <UserList users={UserData.contributors} />
         </section>
         <section>

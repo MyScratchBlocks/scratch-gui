@@ -442,7 +442,7 @@ const SettingsModalComponent = props => (
         <Box className={styles.body}>
             <Header>
                 <FormattedMessage
-                    defaultMessage="Approved by the MyScratchBlocks Developers"
+                    defaultMessage="Approved by the SnapLabs Developers"
                     description="Settings modal section"
                     id="tw.settingsModal.featured"
                 />
@@ -485,7 +485,7 @@ const SettingsModalComponent = props => (
             />
             <Header>
                 <FormattedMessage
-                    defaultMessage="Marked as dangerous by the MyScratchBlocks Developers"
+                    defaultMessage="Marked as dangerous by the SnapLabs Developers"
                     description="Settings modal section"
                     id="tw.settingsModal.dangerZone"
                 />

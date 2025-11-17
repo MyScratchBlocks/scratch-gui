@@ -8,11 +8,11 @@ import {defaultProjectId} from '../../reducers/project-state';
 import styles from './project-input.css';
 import {setProjectId} from '../../lib/tw-navigation-utils';
 
-const PROJECT_BASE = 'https://myscratchblocks.github.io/projects#';
+const PROJECT_BASE = 'https://SnapLabs.github.io/projects#';
 
 const messages = defineMessages({
     tooltip: {
-        defaultMessage: 'Copy and paste a MyScratchBlocks project link here!',
+        defaultMessage: 'Copy and paste a SnapLabs project link here!',
         description: 'Project ID input tooltip',
         id: 'tw.input.tooltip'
     }

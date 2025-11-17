@@ -16,14 +16,14 @@ const CrashMessage = props => (
             />
             <p className={styles.header}>
                 <FormattedMessage
-                    defaultMessage="Oops! There an issue loading this MyScratchBlocks Project."
+                    defaultMessage="Oops! There an issue loading this SnapLabs Project."
                     description="Crash Message title"
                     id="gui.crashMessage.label"
                 />
             </p>
             <p>
                 <FormattedMessage
-                    defaultMessage={'We are so sorry, but it looks like the MyScratchBlocks editor has crashed.' +
+                    defaultMessage={'We are so sorry, but it looks like the SnapLabs editor has crashed.' +
                         ' Please refresh your page to try' +
                         ' again.'}
                     description="Message to inform the user that page has crashed."

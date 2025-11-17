@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const DocumentationLink = ({slug, children}) => (
     <a
-        href={`https://myscratchblocks.github.io/docs#${slug}`}
+        href={`https://SnapLabs.github.io/docs#${slug}`}
         target="_blank"
         rel="noopener noreferrer"
     >

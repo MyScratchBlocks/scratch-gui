@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2025 MyScratchBlocks
+ * Copyright (C) 2025 SnapLabs
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3.
  */
@@ -99,31 +99,31 @@ const Footer = () => (
                     <a href="credits.html">
                         <FormattedMessage defaultMessage="Credits" id="tw.footer.credits" />
                     </a>
-                    <a href="https://myscratchblocks.github.io/community-projects">
+                    <a href="https://SnapLabs.github.io/community-projects">
                         <FormattedMessage defaultMessage="Community Projects" id="tw.footer.donate" />
                     </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://myscratchblocks.githb.io/desktop">TurboWarp Desktop</a>
-                    <a href="https://myscratchblocks.github.io/packager">MyScratchBlocks Packager</a>
+                    <a href="https://SnapLabs.githb.io/desktop">TurboWarp Desktop</a>
+                    <a href="https://SnapLabs.github.io/packager">SnapLabs Packager</a>
                     <a href="https://docs.turbowarp.org/embedding">
                         <FormattedMessage defaultMessage="Embedding" id="tw.footer.embed" />
                     </a>
-                    <a href="https://myscratchblocks.github.io/docs#url-parameters">
+                    <a href="https://SnapLabs.github.io/docs#url-parameters">
                         <FormattedMessage defaultMessage="URL Parameters" id="tw.footer.parameters" />
                     </a>
-                    <a href="https://myscratchblocks.github.io/docs/">
+                    <a href="https://SnapLabs.github.io/docs/">
                         <FormattedMessage defaultMessage="Documentation" id="tw.footer.documentation" />
                     </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://github.com/MyScratchBlocks/scratch-gui/issues/">
+                    <a href="https://github.com/SnapLabs/scratch-gui/issues/">
                         <FormattedMessage defaultMessage="Feedback & Bugs" id="tw.feedback" />
                     </a>
-                    <a href="https://github.com/MyScratchBlocks/scratch-gui/">
+                    <a href="https://github.com/SnapLabs/scratch-gui/">
                         <FormattedMessage defaultMessage="Source Code" id="tw.code" />
                     </a>
-                    <a href="https://myscratchblocks.githun.io/privacy-policy.html">
+                    <a href="https://SnapLabs.githun.io/privacy-policy.html">
                         <FormattedMessage defaultMessage="Privacy Policy" id="tw.privacy" />
                     </a>
                 </div>

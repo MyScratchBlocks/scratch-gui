@@ -32,7 +32,7 @@ const WebGlModal = ({intl, ...props}) => (
                 <p>
                     { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for MyScratchBlocks and Scratch 3.0 to run. Please ask your parent to get a better browser or change your browser's settings to support it."
+                        defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for SnapLabs and Scratch 3.0 to run. Please ask your parent to get a better browser or change your browser's settings to support it."
                         description="WebGL missing message"
                         id="gui.webglModal.description"
                         values={{
