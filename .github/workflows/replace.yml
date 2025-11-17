@@ -1,5 +1,8 @@
 name: Replace MyScratchBlocks With SnapLabs
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
   push:
