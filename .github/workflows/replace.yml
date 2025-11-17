@@ -1,10 +1,10 @@
 name: Replace MyScratchBlocks With SnapLabs
 
 on:
-  workflow_dispatch:   # allows manual run
+  workflow_dispatch:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   replace:
@@ -14,21 +14,27 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Replace text (case-insensitive)
+    - name: Replace text (case-insensitive, ignoring .git and .github)
       run: |
-        # Replace MyScratchBlocks in any casing with SnapLabs
-        grep -ril "myscratchblocks" . | while read file; do
-          sed -i 's/MyScratchBlocks/SnapLabs/gI' "$file"
-        done
+        # Find all files except those inside .git or .github
+        find . \
+          -type f \
+          -not -path "./.git/*" \
+          -not -path "./.github/*" \
+        | while read file; do
+            # Replace any-case MyScratchBlocks with SnapLabs
+            sed -i 's/MyScratchBlocks/SnapLabs/gI' "$file"
+          done
 
     - name: Commit changes
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git add -A
+
         if git diff --cached --quiet; then
           echo "No changes to commit."
         else
-          git commit -m "Replace MyScratchBlocks with SnapLabs"
+          git commit -m "Replace MyScratchBlocks with SnapLabs (case-insensitive)"
           git push
         fi
